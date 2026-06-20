@@ -1,0 +1,118 @@
+.page {
+  padding: var(--space-lg) 0 var(--space-3xl);
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.header {
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-bottom: var(--space-xs);
+}
+
+.titleAccent {
+  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-2xl);
+}
+
+.statCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+
+.statValue {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.statLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.statWon .statValue {
+  color: var(--status-won);
+}
+
+.statLost .statValue {
+  color: var(--status-lost);
+}
+
+.statPending .statValue {
+  color: var(--status-pending);
+}
+
+.statValuePositive {
+  color: var(--status-won) !important;
+}
+
+.statValueNegative {
+  color: var(--status-lost) !important;
+}
+
+/* Bets List */
+.betsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+@media (max-width: 768px) {
+  .statsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .title {
+    font-size: var(--text-3xl);
+  }
+
+  .statValue {
+    font-size: var(--text-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

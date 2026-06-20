@@ -1,0 +1,108 @@
+.timeline {
+  position: relative;
+  padding: var(--space-lg) 0;
+}
+
+.line {
+  position: absolute;
+  left: 20px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--accent-primary-dim) 5%,
+    var(--border-light) 50%,
+    var(--accent-primary-dim) 95%,
+    transparent
+  );
+}
+
+.hourBlock {
+  position: relative;
+  margin-bottom: var(--space-2xl);
+}
+
+.hourMarker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  padding-left: 8px;
+}
+
+.dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 3px solid var(--accent-primary);
+  box-shadow: 0 0 12px rgba(0, 255, 135, 0.3);
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.dot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+}
+
+.hourLabel {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.matchCount {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  padding: 2px 10px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-full);
+}
+
+.matchesGrid {
+  padding-left: 54px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--space-md);
+}
+
+@media (max-width: 768px) {
+  .line {
+    left: 14px;
+  }
+
+  .hourMarker {
+    padding-left: 2px;
+  }
+
+  .dot {
+    width: 22px;
+    height: 22px;
+  }
+
+  .dot::after {
+    width: 6px;
+    height: 6px;
+  }
+
+  .matchesGrid {
+    padding-left: 44px;
+    grid-template-columns: 1fr;
+  }
+
+  .hourLabel {
+    font-size: var(--text-lg);
+  }
+}
