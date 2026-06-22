@@ -10,7 +10,7 @@ const globalStore = globalThis as unknown as {
 if (!globalStore._betStore) {
   globalStore._betStore = new Map<string, Bet[]>();
   globalStore._betCounter = 100;
-  
+
   // Seed the demo user with mock data
   const DEMO_USER_ID = "demo-user";
   globalStore._betStore.set(DEMO_USER_ID, [...(betsData.bets as Bet[])]);
@@ -27,10 +27,7 @@ export function getUserBets(userId: string): Bet[] {
   return store.get(userId) ?? [];
 }
 
-export function getBetById(
-  userId: string,
-  betId: string
-): BetWithMatch | undefined {
+export function getBetById(userId: string, betId: string): BetWithMatch | undefined {
   const bets = store.get(userId) ?? [];
   const bet = bets.find((b) => b.id === betId);
   if (!bet) return undefined;
@@ -47,12 +44,7 @@ export function getAllBetsForUser(userId: string): BetWithMatch[] {
   }));
 }
 
-export function placeBet(
-  userId: string,
-  matchId: string,
-  pick: BetPick,
-  stake: number
-): Bet {
+export function placeBet(userId: string, matchId: string, pick: BetPick, stake: number): Bet {
   const match = getMatchById(matchId);
   if (!match) {
     throw new Error(`Match ${matchId} not found`);
@@ -82,16 +74,19 @@ export function placeBet(
   store.get(userId)!.push(newBet);
 
   // Simulate resolution after a random delay (10-30 seconds)
-  setTimeout(() => {
-    const random = Math.random();
-    if (random < 0.4) {
-      newBet.status = "WON";
-      newBet.return = parseFloat((newBet.stake * newBet.odd).toFixed(2));
-    } else {
-      newBet.status = "LOST";
-      newBet.return = 0;
-    }
-  }, Math.floor(Math.random() * 20000) + 10000);
+  setTimeout(
+    () => {
+      const random = Math.random();
+      if (random < 0.4) {
+        newBet.status = "WON";
+        newBet.return = parseFloat((newBet.stake * newBet.odd).toFixed(2));
+      } else {
+        newBet.status = "LOST";
+        newBet.return = 0;
+      }
+    },
+    Math.floor(Math.random() * 20000) + 10000,
+  );
 
   return newBet;
 }

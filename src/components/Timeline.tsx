@@ -26,7 +26,9 @@ export default function Timeline({ hourGroups, userPicks = {} }: TimelineProps) 
         >
           <div className="flex items-center gap-md mb-lg pl-[8px] max-md:pl-[2px]">
             <div className="w-[26px] h-[26px] max-md:w-[22px] max-md:h-[22px] rounded-full bg-bg-primary border-[3px] border-accent-primary shadow-[0_0_12px_rgba(0,255,135,0.3)] relative z-[2] shrink-0 after:absolute after:top-1/2 after:left-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:w-2 after:h-2 max-md:after:w-[6px] max-md:after:h-[6px] after:rounded-full after:bg-accent-primary" />
-            <span className="font-heading text-xl max-md:text-lg font-bold text-text-primary">{group.hourLabel}</span>
+            <span className="font-heading text-xl max-md:text-lg font-bold text-text-primary">
+              {group.hourLabel}
+            </span>
             <span className="text-sm text-text-muted px-[10px] py-[2px] bg-bg-surface rounded-full">
               {group.matches.length} {group.matches.length === 1 ? t("match") : t("matches")}
             </span>

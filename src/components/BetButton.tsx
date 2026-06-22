@@ -42,14 +42,20 @@ export default function BetButton({
           : undefined
       }
       transition={
-        isSelected
-          ? { boxShadow: { duration: 1.5, repeat: Infinity } }
-          : { duration: 0.15 }
+        isSelected ? { boxShadow: { duration: 1.5, repeat: Infinity } } : { duration: 0.15 }
       }
     >
-      <span className={`font-heading text-lg font-extrabold max-md:text-base ${isSelected ? "text-accent-primary" : "text-text-primary"}`}>{label}</span>
-      <span className="text-[10px] text-text-muted font-medium uppercase tracking-[0.3px]">{subLabel}</span>
-      <span className="text-sm font-bold text-accent-primary mt-[2px] max-md:text-xs">{odd.toFixed(2)}</span>
+      <span
+        className={`font-heading text-lg font-extrabold max-md:text-base ${isSelected ? "text-accent-primary" : "text-text-primary"}`}
+      >
+        {label}
+      </span>
+      <span className="text-[10px] text-text-muted font-medium uppercase tracking-[0.3px]">
+        {subLabel}
+      </span>
+      <span className="text-sm font-bold text-accent-primary mt-[2px] max-md:text-xs">
+        {odd.toFixed(2)}
+      </span>
     </motion.button>
   );
 }

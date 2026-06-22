@@ -41,10 +41,9 @@ export function getMatchesGroupedByHour(): HourGroup[] {
     hourGroups.push({
       hour: key,
       hourLabel: `${hour12}:00 ${period}`,
-      matches: grouped.get(key)!.sort(
-        (a, b) =>
-          new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
-      ),
+      matches: grouped
+        .get(key)!
+        .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime()),
     });
   }
 

@@ -19,15 +19,15 @@ Mini aplicación web de apuestas deportivas simuladas construida con Next.js 15 
 
 ## 🛠️ Tech Stack
 
-| Tecnología | Propósito |
-|---|---|
+| Tecnología              | Propósito                  |
+| ----------------------- | -------------------------- |
 | Next.js 15 (App Router) | Framework, SSR, API Routes |
-| React 18 | UI Components |
-| TypeScript | Type safety |
-| NextAuth v5 (Auth.js) | Authentication |
-| Framer Motion | Animations |
-| Sonner | Toast notifications |
-| Vanilla CSS Modules | Styling |
+| React 18                | UI Components              |
+| TypeScript              | Type safety                |
+| NextAuth v5 (Auth.js)   | Authentication             |
+| Framer Motion           | Animations                 |
+| Sonner                  | Toast notifications        |
+| Vanilla CSS Modules     | Styling                    |
 
 ## 🚀 Getting Started
 
@@ -123,14 +123,14 @@ src/
 
 ### Server vs Client Components
 
-| Component | Type | Reason |
-|---|---|---|
-| `page.tsx` (Home) | Server | Fetches data from API route |
-| `profile/page.tsx` | Server | Auth check + data fetch |
-| `bets/[betId]/page.tsx` | Server | Auth check + data fetch |
-| `Timeline` | Client | Framer Motion animations |
-| `EventCard` | Client | User interaction (betting) |
-| `Navbar` | Client | Session state + menu toggle |
+| Component               | Type   | Reason                      |
+| ----------------------- | ------ | --------------------------- |
+| `page.tsx` (Home)       | Server | Fetches data from API route |
+| `profile/page.tsx`      | Server | Auth check + data fetch     |
+| `bets/[betId]/page.tsx` | Server | Auth check + data fetch     |
+| `Timeline`              | Client | Framer Motion animations    |
+| `EventCard`             | Client | User interaction (betting)  |
+| `Navbar`                | Client | Session state + menu toggle |
 
 ### Data Flow
 

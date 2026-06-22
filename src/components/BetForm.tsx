@@ -17,7 +17,7 @@ interface BetFormProps {
 export default function BetForm({ match, initialPick, onClose, onSuccess }: BetFormProps) {
   const t = useTranslations("Components.betDetail");
   const tComp = useTranslations("Components");
-  
+
   const [currentPick, setCurrentPick] = useState<BetPick>(initialPick);
   const [stake, setStake] = useState<string>("10");
   const [isPlacing, setIsPlacing] = useState(false);
@@ -26,17 +26,18 @@ export default function BetForm({ match, initialPick, onClose, onSuccess }: BetF
   useEffect(() => {
     setMounted(true);
     // Prevent background scrolling when modal is open
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, []);
 
   const MIN_BET = 1;
   const MAX_BET = 10000;
 
-  const selectedOdd = match.market.odds[currentPick === "HOME" ? "home" : currentPick === "AWAY" ? "away" : "draw"];
-  
+  const selectedOdd =
+    match.market.odds[currentPick === "HOME" ? "home" : currentPick === "AWAY" ? "away" : "draw"];
+
   const getPickLabel = (pick: BetPick) => {
     if (pick === "HOME") return match.homeTeam.shortName;
     if (pick === "AWAY") return match.awayTeam.shortName;
@@ -75,7 +76,7 @@ export default function BetForm({ match, initialPick, onClose, onSuccess }: BetF
       toast.success(tComp("eventCard.success"), {
         description: `$${stakeAmount} on ${getPickLabel(currentPick)} @ ${selectedOdd}`,
       });
-      
+
       onSuccess(currentPick);
       onClose();
     } catch {
@@ -87,22 +88,33 @@ export default function BetForm({ match, initialPick, onClose, onSuccess }: BetF
   };
 
   const modalContent = (
-    <div className="fixed inset-0 z-[9999] bg-[rgba(10,10,15,0.7)] backdrop-blur-[12px] flex items-center justify-center p-md animate-fade-in" onClick={(e) => { if(e.target === e.currentTarget) onClose(); }}>
+    <div
+      className="fixed inset-0 z-[9999] bg-[rgba(10,10,15,0.7)] backdrop-blur-[12px] flex items-center justify-center p-md animate-fade-in"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
       <div className="absolute -top-[100px] -left-[100px] w-[300px] h-[300px] rounded-full blur-[100px] -z-10 opacity-30 bg-accent-purple pointer-events-none" />
       <div className="absolute -bottom-[100px] -right-[100px] w-[300px] h-[300px] rounded-full blur-[100px] -z-10 opacity-30 bg-accent-blue pointer-events-none" />
-      
+
       <div className="liquid-glass rounded-lg p-2xl w-full max-w-[450px] shadow-lg animate-slide-up relative z-10">
-        <h1 className="font-heading text-3xl font-extrabold tracking-[-1px] mb-xl text-center bg-gradient-to-br from-white to-white/70 bg-clip-text text-transparent">{t("title")}</h1>
-        
+        <h1 className="font-heading text-3xl font-extrabold tracking-[-1px] mb-xl text-center bg-gradient-to-br from-white to-white/70 bg-clip-text text-transparent">
+          {t("title")}
+        </h1>
+
         <div className="flex flex-col gap-xs mb-xl text-center pb-md border-b border-border-subtle">
-          <span className="text-xs text-text-muted uppercase tracking-[0.5px] font-semibold">{t("match")}:</span>
+          <span className="text-xs text-text-muted uppercase tracking-[0.5px] font-semibold">
+            {t("match")}:
+          </span>
           <span className="text-lg text-text-primary font-bold">
             {match.homeTeam.name} vs {match.awayTeam.name}
           </span>
         </div>
-        
+
         <div className="flex flex-col gap-sm mb-xl">
-          <span className="text-xs text-text-muted uppercase tracking-[0.5px] font-semibold">{t("pick")}</span>
+          <span className="text-xs text-text-muted uppercase tracking-[0.5px] font-semibold">
+            {t("pick")}
+          </span>
           <div className="grid grid-cols-3 gap-sm">
             <BetButton
               label="1"
@@ -132,10 +144,12 @@ export default function BetForm({ match, initialPick, onClose, onSuccess }: BetF
         </div>
 
         <div className="flex flex-col gap-xs mb-lg">
-          <label className="text-xs text-text-muted uppercase tracking-[0.5px] font-semibold">{t("stake")}</label>
+          <label className="text-xs text-text-muted uppercase tracking-[0.5px] font-semibold">
+            {t("stake")}
+          </label>
           <div className="relative flex items-center">
             <span className="absolute left-4 text-text-muted text-xl font-semibold">$</span>
-            <input 
+            <input
               type="number"
               value={stake}
               onChange={(e) => setStake(e.target.value)}
@@ -144,28 +158,38 @@ export default function BetForm({ match, initialPick, onClose, onSuccess }: BetF
               autoFocus
             />
           </div>
-          {errorMessage && <span className="text-[#ff4757] text-xs font-medium mt-1">{errorMessage}</span>}
+          {errorMessage && (
+            <span className="text-[#ff4757] text-xs font-medium mt-1">{errorMessage}</span>
+          )}
         </div>
 
         <div className="flex justify-between items-center p-md bg-[#00ff87]/10 border border-[#00ff87]/20 rounded-md mb-2xl">
-          <span className="text-xs text-text-muted uppercase tracking-[0.5px] font-semibold">{t("potentialReturn")}</span>
-          <span className="text-2xl font-extrabold text-[#00ff87] tracking-[-0.5px]">${potentialReturn}</span>
+          <span className="text-xs text-text-muted uppercase tracking-[0.5px] font-semibold">
+            {t("potentialReturn")}
+          </span>
+          <span className="text-2xl font-extrabold text-[#00ff87] tracking-[-0.5px]">
+            ${potentialReturn}
+          </span>
         </div>
 
         <div className="flex gap-md">
-          <button 
-            className="flex-1 p-[14px] liquid-button text-text-secondary rounded-md font-semibold text-base cursor-pointer hover:text-text-primary disabled:opacity-50 disabled:cursor-not-allowed" 
+          <button
+            className="flex-1 p-[14px] liquid-button text-text-secondary rounded-md font-semibold text-base cursor-pointer hover:text-text-primary disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={onClose}
             disabled={isPlacing}
           >
             {t("cancel")}
           </button>
-          <button 
-            className="flex-[2] p-[14px] liquid-button-primary rounded-md font-bold text-base cursor-pointer flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" 
+          <button
+            className="flex-[2] p-[14px] liquid-button-primary rounded-md font-bold text-base cursor-pointer flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             onClick={handleConfirm}
             disabled={isPlacing || !isValidStake}
           >
-            {isPlacing ? <span className="w-5 h-5 border-2 border-bg-primary/30 border-t-bg-primary rounded-full animate-spin" /> : t("confirmBet")}
+            {isPlacing ? (
+              <span className="w-5 h-5 border-2 border-bg-primary/30 border-t-bg-primary rounded-full animate-spin" />
+            ) : (
+              t("confirmBet")
+            )}
           </button>
         </div>
       </div>

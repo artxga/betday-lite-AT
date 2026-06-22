@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import {NextIntlClientProvider} from 'next-intl';
-import {getMessages} from 'next-intl/server';
-import {notFound} from 'next/navigation';
-import {routing} from '@/i18n/routing';
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { routing } from "@/i18n/routing";
 import Providers from "@/components/Providers";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
@@ -20,7 +20,7 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{locale: string}>;
+  params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
 
@@ -38,9 +38,7 @@ export default async function RootLayout({
             <Navbar />
             <div className="app-layout">
               <Sidebar />
-              <main className="main-content">
-                {children}
-              </main>
+              <main className="main-content">{children}</main>
             </div>
           </Providers>
         </NextIntlClientProvider>

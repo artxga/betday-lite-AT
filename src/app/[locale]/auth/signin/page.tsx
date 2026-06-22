@@ -47,11 +47,12 @@ export default function SignInPage() {
             <Zap size={24} />
           </div>
           <h1 className="font-heading text-2xl font-extrabold mb-sm">
-            {t("title").split(" ").slice(0, -1).join(" ")} <span className="bg-gradient-to-br from-accent-primary to-accent-blue bg-clip-text text-transparent">{t("title").split(" ").pop()}</span>
+            {t("title").split(" ").slice(0, -1).join(" ")}{" "}
+            <span className="bg-gradient-to-br from-accent-primary to-accent-blue bg-clip-text text-transparent">
+              {t("title").split(" ").pop()}
+            </span>
           </h1>
-          <p className="text-sm text-text-secondary">
-            {t("subtitle")}
-          </p>
+          <p className="text-sm text-text-secondary">{t("subtitle")}</p>
         </div>
 
         <form onSubmit={handleCredentialsLogin} className="flex flex-col gap-md">
@@ -83,12 +84,14 @@ export default function SignInPage() {
               className="liquid-input px-4 py-3 rounded-md text-sm text-text-primary outline-none placeholder:text-text-muted"
               required
             />
-            <span className="text-xs text-text-muted italic">
-              {t("passwordHint")}
-            </span>
+            <span className="text-xs text-text-muted italic">{t("passwordHint")}</span>
           </div>
 
-          {error && <p className="text-sm text-status-lost py-sm px-md bg-status-lost-bg rounded-md border border-status-lost/20">{error}</p>}
+          {error && (
+            <p className="text-sm text-status-lost py-sm px-md bg-status-lost-bg rounded-md border border-status-lost/20">
+              {error}
+            </p>
+          )}
 
           <button
             type="submit"

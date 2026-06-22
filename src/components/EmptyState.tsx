@@ -22,9 +22,16 @@ export default function EmptyState({
       <div className="w-[80px] h-[80px] rounded-full bg-bg-surface border border-border-subtle flex items-center justify-center mb-lg animate-float">
         <Inbox size={32} className="text-[36px]" />
       </div>
-      <h3 className="font-heading text-2xl font-bold text-text-primary mb-sm">{title || t("title")}</h3>
-      <p className="text-sm text-text-secondary max-w-[360px] leading-[1.6] mb-xl">{description || t("description")}</p>
-      <Link href={ctaHref} className="inline-flex items-center gap-sm py-sm px-xl bg-gradient-to-br from-accent-primary to-[#00cc6a] text-bg-primary font-bold text-sm rounded-full transition-all duration-150 hover:-translate-y-[2px] hover:shadow-glow">
+      <h3 className="font-heading text-2xl font-bold text-text-primary mb-sm">
+        {title || t("title")}
+      </h3>
+      <p className="text-sm text-text-secondary max-w-[360px] leading-[1.6] mb-xl">
+        {description || t("description")}
+      </p>
+      <Link
+        href={ctaHref}
+        className="inline-flex items-center gap-sm py-sm px-xl bg-gradient-to-br from-accent-primary to-[#00cc6a] text-bg-primary font-bold text-sm rounded-full transition-all duration-150 hover:-translate-y-[2px] hover:shadow-glow"
+      >
         {ctaLabel || t("cta")}
       </Link>
     </div>

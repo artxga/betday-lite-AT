@@ -65,8 +65,8 @@ export interface BetWithMatch extends Bet {
 }
 
 export interface HourGroup {
-  hour: string;       // "00:00", "01:00", etc.
-  hourLabel: string;  // "12:00 AM", "1:00 AM", etc.
+  hour: string; // "00:00", "01:00", etc.
+  hourLabel: string; // "12:00 AM", "1:00 AM", etc.
   matches: Match[];
 }
 

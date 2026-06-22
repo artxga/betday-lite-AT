@@ -31,15 +31,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   const session = await auth();
   const userBets = session?.user?.id ? getUserBets(session.user.id) : [];
-  const userPicks = userBets.reduce((acc, bet) => {
-    acc[bet.matchId] = bet.pick;
-    return acc;
-  }, {} as Record<string, BetPick>);
-
-  const totalMatches = hourGroups.reduce(
-    (sum, group) => sum + group.matches.length,
-    0
+  const userPicks = userBets.reduce(
+    (acc, bet) => {
+      acc[bet.matchId] = bet.pick;
+      return acc;
+    },
+    {} as Record<string, BetPick>,
   );
+
+  const totalMatches = hourGroups.reduce((sum, group) => sum + group.matches.length, 0);
 
   return (
     <div className="pt-lg pb-3xl">
@@ -47,7 +47,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <header className="flex justify-between items-end mb-2xl pb-lg border-b border-border-subtle max-md:flex-col max-md:items-start max-md:gap-md">
           <div className="flex flex-col gap-sm">
             <h1 className="font-heading text-4xl max-md:text-3xl font-extrabold tracking-[-1px] leading-[1.1]">
-              {t("title").split(" ")[0]} {t("title").split(" ")[1]} <span className="bg-gradient-to-br from-accent-primary to-accent-blue bg-clip-text text-transparent">{t("title").split(" ").slice(2).join(" ")}</span>
+              {t("title").split(" ")[0]} {t("title").split(" ")[1]}{" "}
+              <span className="bg-gradient-to-br from-accent-primary to-accent-blue bg-clip-text text-transparent">
+                {t("title").split(" ").slice(2).join(" ")}
+              </span>
             </h1>
             <p className="text-sm text-text-secondary">
               {t("description")}: {totalMatches}

@@ -26,24 +26,17 @@ export async function POST(request: NextRequest) {
     const { matchId, pick, stake } = body;
 
     if (!matchId || !pick || !stake) {
-      return NextResponse.json(
-        { error: "matchId, pick, and stake are required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "matchId, pick, and stake are required" }, { status: 400 });
     }
 
     if (!["HOME", "DRAW", "AWAY"].includes(pick)) {
-      return NextResponse.json(
-        { error: "pick must be HOME, DRAW, or AWAY" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "pick must be HOME, DRAW, or AWAY" }, { status: 400 });
     }
 
     const bet = placeBet(session.user.id, matchId, pick, stake);
     return NextResponse.json({ bet }, { status: 201 });
   } catch (error) {
-    const message =
-      error instanceof Error ? error.message : "Internal server error";
+    const message = error instanceof Error ? error.message : "Internal server error";
     return NextResponse.json({ error: message }, { status: 500 });
   }
 }
