@@ -19,6 +19,7 @@ const pickLabels: Record<BetPick, string> = {
 
 export default function BetCard({ bet, index }: BetCardProps) {
   const t = useTranslations("Components.betCard");
+  const tPick = useTranslations("BetDetail");
   const matchTime = bet.match
     ? new Date(bet.match.startTime).toLocaleTimeString("en-US", {
         hour: "2-digit",
@@ -71,7 +72,9 @@ export default function BetCard({ bet, index }: BetCardProps) {
         <div className="flex items-center gap-lg max-md:gap-md flex-wrap">
           <div className="flex items-center gap-sm">
             <span className="w-8 h-8 rounded-md bg-accent-primary-dim border border-border-accent flex items-center justify-center font-heading font-extrabold text-sm text-accent-primary">{pickLabels[bet.pick]}</span>
-            <span className="text-xs text-text-secondary font-medium uppercase">{bet.pick}</span>
+            <span className="text-xs text-text-secondary font-medium uppercase">
+              {bet.pick === "HOME" ? tPick("homeWin") : bet.pick === "DRAW" ? tPick("draw") : tPick("awayWin")}
+            </span>
           </div>
 
           <div className="flex gap-lg max-md:gap-md flex-1">
