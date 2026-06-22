@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { Inbox } from "lucide-react";
 import styles from "./EmptyState.module.css";
 
 interface EmptyStateProps {
@@ -20,7 +21,7 @@ export default function EmptyState({
   return (
     <div className={styles.empty}>
       <div className={styles.iconWrapper}>
-        <span className={styles.icon}>🎰</span>
+        <Inbox size={32} className={styles.icon} />
       </div>
       <h3 className={styles.title}>{title || t("title")}</h3>
       <p className={styles.description}>{description || t("description")}</p>

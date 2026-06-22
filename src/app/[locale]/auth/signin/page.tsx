@@ -43,7 +43,9 @@ export default function SignInPage() {
     <div className={styles.page}>
       <div className={styles.card}>
         <div className={styles.header}>
-          <div className={styles.logoIcon}>⚡</div>
+          <div className={styles.logoIcon}>
+            <Zap size={24} />
+          </div>
           <h1 className={styles.title}>
             {t("title").split(" ").slice(0, -1).join(" ")} <span className={styles.titleAccent}>{t("title").split(" ").pop()}</span>
           </h1>

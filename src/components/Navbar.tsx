@@ -4,6 +4,7 @@ import { useSession, signOut } from "next-auth/react";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
+import { Zap, Menu } from "lucide-react";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
@@ -49,7 +50,9 @@ export default function Navbar() {
       <div className={styles.navInner}>
         <div className={styles.mobileLogo}>
           <Link href="/" className={styles.logo}>
-            <div className={styles.logoIcon}>⚡</div>
+            <div className={styles.logoIcon}>
+              <Zap size={16} />
+            </div>
             <span>
               <span className={styles.logoText}>{t("title").split(" ")[0]}</span>
               <span className={styles.logoTextDim}> {t("title").split(" ")[1]}</span>
@@ -97,13 +100,11 @@ export default function Navbar() {
           )}
 
           <button
-            className={`${styles.hamburger} ${menuOpen ? styles.hamburgerOpen : ""}`}
+            className={styles.hamburger}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
-            <span />
-            <span />
-            <span />
+            <Menu size={24} />
           </button>
         </div>
       </div>

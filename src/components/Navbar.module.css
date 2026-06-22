@@ -202,18 +202,18 @@
 /* Hamburger */
 .hamburger {
   display: none; /* hidden on desktop */
-  flex-direction: column;
-  gap: 5px;
-  padding: var(--space-sm);
+  padding: var(--space-xs);
   cursor: pointer;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast);
 }
 
-.hamburger span {
-  width: 20px;
-  height: 2px;
-  background: var(--text-secondary);
-  border-radius: 2px;
-  transition: all var(--transition-fast);
+.hamburger:hover {
+  color: var(--text-primary);
 }
 
 /* Mobile */
