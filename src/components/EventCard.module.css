@@ -34,6 +34,7 @@
 
 .cardBetPlaced {
   border-color: var(--border-accent);
+  padding-bottom: calc(var(--space-lg) + 28px);
 }
 
 .header {
@@ -138,6 +139,10 @@
 @media (max-width: 768px) {
   .card {
     padding: var(--space-md);
+  }
+  
+  .cardBetPlaced {
+    padding-bottom: calc(var(--space-md) + 28px);
   }
 
   .teamShort {
