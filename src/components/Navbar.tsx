@@ -32,16 +32,6 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <button
-          className={`${styles.hamburger} ${menuOpen ? styles.hamburgerOpen : ""}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-
         <div
           className={`${styles.navContent} ${menuOpen ? styles.navContentOpen : ""}`}
         >
@@ -91,6 +81,16 @@ export default function Navbar() {
             )}
           </div>
         </div>
+
+        <button
+          className={`${styles.hamburger} ${menuOpen ? styles.hamburgerOpen : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span />
+          <span />
+          <span />
+        </button>
       </div>
     </nav>
   );

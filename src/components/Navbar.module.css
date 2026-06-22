@@ -58,9 +58,9 @@
 .navContent {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: var(--space-xl);
   flex: 1;
-  margin-left: var(--space-xl);
 }
 
 .navLinks {
@@ -70,8 +70,6 @@
 }
 
 .navLink {
-  padding: var(--space-sm) var(--space-md);
-  border-radius: var(--radius-md);
   font-size: var(--text-sm);
   font-weight: 500;
   color: var(--text-secondary);
@@ -83,12 +81,11 @@
 
 .navLink:hover {
   color: var(--text-primary);
-  background: var(--bg-surface);
 }
 
 .navLinkActive {
   color: var(--accent-primary);
-  background: var(--accent-primary-dim);
+  font-weight: 600;
 }
 
 .navActions {
@@ -226,7 +223,7 @@
 
   .navLink {
     width: 100%;
-    padding: var(--space-md);
+    padding: var(--space-md) 0;
     font-size: var(--text-base);
   }
 
