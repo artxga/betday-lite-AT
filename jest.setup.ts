@@ -1,19 +1,19 @@
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 
 // Mock next-intl
-jest.mock('next-intl', () => ({
+jest.mock("next-intl", () => ({
   useTranslations: () => (key: string, values?: Record<string, any>) => {
     if (values) {
       return `${key} ${JSON.stringify(values)}`;
     }
     return key;
   },
-  useLocale: () => 'es',
+  useLocale: () => "es",
 }));
 
 // Mock i18n routing
-jest.mock('@/i18n/routing', () => ({
-  usePathname: () => '/',
+jest.mock("@/i18n/routing", () => ({
+  usePathname: () => "/",
   useRouter: () => ({
     push: jest.fn(),
     replace: jest.fn(),
@@ -21,13 +21,13 @@ jest.mock('@/i18n/routing', () => ({
     back: jest.fn(),
   }),
   Link: ({ children, href, className }: any) => {
-    const React = require('react');
-    return React.createElement('a', { href, className }, children);
+    const React = require("react");
+    return React.createElement("a", { href, className }, children);
   },
 }));
 
 // Mock next/navigation
-jest.mock('next/navigation', () => ({
+jest.mock("next/navigation", () => ({
   useRouter: () => ({
     push: jest.fn(),
     replace: jest.fn(),
@@ -35,15 +35,15 @@ jest.mock('next/navigation', () => ({
     back: jest.fn(),
     refresh: jest.fn(),
   }),
-  usePathname: () => '/',
+  usePathname: () => "/",
 }));
 
 // Mock next-auth
-jest.mock('next-auth/react', () => ({
+jest.mock("next-auth/react", () => ({
   useSession: () => ({
     data: null,
-    status: 'unauthenticated'
+    status: "unauthenticated",
   }),
   signIn: jest.fn(),
-  signOut: jest.fn()
+  signOut: jest.fn(),
 }));

@@ -5,35 +5,41 @@ Mini aplicación web de apuestas deportivas simuladas construida con Next.js 15 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)
 ![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-v4-%2338B2AC?style=flat-square&logo=tailwind-css)
+![Jest](https://img.shields.io/badge/Jest-Unit_Testing-%23C21325?style=flat-square&logo=jest)
+![Cypress](https://img.shields.io/badge/Cypress-E2E_Testing-%2317202C?style=flat-square&logo=cypress)
 
 ## 🎯 Features
 
-- **Timeline View**: Eventos de apuestas del día organizados por hora
-- **1X2 Betting**: Apuestas simuladas con mercado 1X2 (Home, Draw, Away)
-- **Authentication**: NextAuth v5 con Credentials y Google OAuth
-- **Profile**: Historial de apuestas con estadísticas
-- **Bet Details**: Vista detallada de cada apuesta
-- **Responsive**: Diseño mobile-first adaptativo
-- **Animations**: Framer Motion + micro-interacciones CSS
-- **Dark Theme**: Diseño premium con glassmorphism
+- **Timeline View**: Eventos de apuestas del día organizados por hora.
+- **1X2 Betting**: Apuestas simuladas con mercado 1X2 (Home, Draw, Away).
+- **Authentication**: NextAuth v5 con Credentials y Google OAuth.
+- **i18n (Internacionalización)**: Soporte completo multi-idioma (Inglés / Español) vía `next-intl`.
+- **Liquid Glass UI**: Diseño inmersivo y vanguardista basado en un sistema de utilidades CSS _Liquid Glass_, con gradientes y fondos translúcidos en Tailwind v4.
+- **Animations**: Framer Motion + micro-interacciones.
+- **Testing Exhaustivo**: Suites unitarias y e2e configuradas nativamente.
+- **Validación Continua**: Hooks de pre-commit nativos de Git protegiendo el código.
 
 ## 🛠️ Tech Stack
 
-| Tecnología              | Propósito                  |
-| ----------------------- | -------------------------- |
-| Next.js 15 (App Router) | Framework, SSR, API Routes |
-| React 18                | UI Components              |
-| TypeScript              | Type safety                |
-| NextAuth v5 (Auth.js)   | Authentication             |
-| Framer Motion           | Animations                 |
-| Sonner                  | Toast notifications        |
-| Vanilla CSS Modules     | Styling                    |
+| Tecnología              | Propósito                         |
+| ----------------------- | --------------------------------- |
+| Next.js 15 (App Router) | Framework, SSR, Rutas dinámicas   |
+| React 18                | Componentes UI                    |
+| TypeScript              | Tipado estricto                   |
+| Tailwind CSS v4         | Utilidades de estilo y diseño     |
+| NextAuth v5 (Auth.js)   | Autenticación                     |
+| next-intl               | Internacionalización / Rutas i18n |
+| Framer Motion           | Animaciones                       |
+| Jest & React Test Lib   | Unit Testing                      |
+| Cypress                 | End-to-End Testing (E2E)          |
+| Oxc (`oxlint`/`oxfmt`)  | Linter y Formateador ultra-rápido |
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 18+ o superior
 - npm
 
 ### Installation
@@ -53,7 +59,7 @@ cp .env.local.example .env.local
 
 ### Environment Variables
 
-Create a `.env.local` file with:
+Crea un archivo `.env.local` con la siguiente información:
 
 ```env
 # Required
@@ -67,77 +73,64 @@ AUTH_GOOGLE_SECRET=your-google-client-secret
 NEXTAUTH_URL=http://localhost:3000
 ```
 
-> **Note:** Para Credentials provider, usa cualquier email con password `"password"` para login.
+> **Note:** Para el Credentials provider, usa un email válido (ej: `demo@betday.com`) y el password `"password"`.
 
-### Development
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000)
-
-### Build
+### Comandos Disponibles
 
 ```bash
-npm run build
-npm start
+npm run dev           # Levanta el servidor de desarrollo en http://localhost:3000
+npm run build         # Compila el build de producción
+npm start             # Inicia el build de producción compilado
+
+npm run lint          # Corre el linter rápido mediante oxlint
+npm run format        # Formatea la sintaxis en los archivos usando oxfmt
+npm run test          # Ejecuta los tests unitarios con Jest
+npm run cypress:open  # Abre la UI interactiva de pruebas E2E con Cypress
+npm run cypress:run   # Corre los tests E2E silenciosamente en la terminal
 ```
 
 ## 📁 Project Structure
 
 ```
-src/
-├── app/
-│   ├── api/
-│   │   ├── auth/[...nextauth]/  → NextAuth route handler
-│   │   ├── events/              → GET events grouped by hour
-│   │   └── bets/                → GET/POST user bets
-│   │       └── [betId]/         → GET bet detail
-│   ├── auth/signin/             → Custom login page
-│   ├── bets/[betId]/            → Bet detail page
-│   ├── profile/                 → Protected profile page
-│   ├── globals.css              → Design system
-│   ├── layout.tsx               → Root layout (Server Component)
-│   └── page.tsx                 → Home page (Server Component)
-├── components/
-│   ├── Navbar                   → Navigation with auth state
-│   ├── Timeline                 → Hourly event timeline
-│   ├── EventCard                → Match card with bet buttons
-│   ├── BetButton                → Individual 1/X/2 button
-│   ├── BetCard                  → Profile bet history card
-│   ├── StatusBadge              → PENDING/WON/LOST badge
-│   ├── EmptyState               → No bets placeholder
-│   └── Providers                → SessionProvider + Toaster
-├── lib/
-│   ├── data/
-│   │   ├── matches.ts           → Match data loader
-│   │   └── bets-store.ts        → In-memory bet store
-│   └── types.ts                 → TypeScript interfaces
-├── auth.config.ts               → NextAuth config (Edge-safe)
-├── auth.ts                      → NextAuth exports
-└── middleware.ts                → Route protection
+├── cypress/                 → Pruebas E2E automatizadas
+├── messages/                → Diccionarios JSON de idiomas (en, es)
+├── src/
+│   ├── app/
+│   │   ├── api/             → Backend Next.js API Routes
+│   │   └── [locale]/        → Rutas de la UI con sufijo de idioma (/en, /es)
+│   ├── components/
+│   │   ├── __tests__/       → Suites unitarias de Jest
+│   │   └── ...              → Componentes compartidos de React
+│   ├── i18n/                → Configuración global de enrutamiento next-intl
+│   └── lib/                 → Datos pre-cargados e interfaces TypeSCript
 ```
+
+## 🛡️ Git Hooks (Pre-commit)
+
+El proyecto incluye de manera nativa comprobaciones _pre-commit_. Al hacer `git commit`, el sistema verifica automáticamente:
+
+1. El código está formateado (`oxfmt`).
+2. Pasa los estándares y reglas de código (`oxlint`).
+3. Todos los unit tests pasan exitosamente (`jest`).
 
 ## 🏗️ Architecture Decisions
 
 ### Server vs Client Components
 
-| Component               | Type   | Reason                      |
-| ----------------------- | ------ | --------------------------- |
-| `page.tsx` (Home)       | Server | Fetches data from API route |
-| `profile/page.tsx`      | Server | Auth check + data fetch     |
-| `bets/[betId]/page.tsx` | Server | Auth check + data fetch     |
-| `Timeline`              | Client | Framer Motion animations    |
-| `EventCard`             | Client | User interaction (betting)  |
-| `Navbar`                | Client | Session state + menu toggle |
+| Component          | Type   | Reason                      |
+| ------------------ | ------ | --------------------------- |
+| `page.tsx` (Home)  | Server | Fetches data from API route |
+| `profile/page.tsx` | Server | Auth check + data fetch     |
+| `Timeline`         | Client | Framer Motion animations    |
+| `EventCard`        | Client | User interaction (betting)  |
+| `Navbar`           | Client | Session state + menu toggle |
 
 ### Data Flow
 
-1. **Matches**: Loaded from `matches.today.50.json` → served via `/api/events`
-2. **Bets**: Seeded from `bets.me.50.json` → managed in-memory via `/api/bets`
-3. **Auth**: NextAuth v5 with Credentials (simulated) + Google OAuth
-4. **Protection**: Middleware protects `/profile` and `/bets/*` routes
+1. **Matches**: Carga local desde JSON (simulado) servido vía API Route.
+2. **Bets**: In-memory store local manejado por `/api/bets`.
+3. **Auth**: NextAuth v5 con Middleware Edge-safe en `/profile`.
+4. **i18n**: Interceptado por `next-intl` a nivel de App Router.
 
 ## 📄 License
 

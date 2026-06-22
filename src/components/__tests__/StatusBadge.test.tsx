@@ -1,19 +1,19 @@
-import { render, screen } from '@testing-library/react';
-import StatusBadge from '../StatusBadge';
+import { render, screen } from "@testing-library/react";
+import StatusBadge from "../StatusBadge";
 
-describe('StatusBadge', () => {
-  it('renders PENDING status correctly', () => {
+describe("StatusBadge", () => {
+  it("renders PENDING status correctly", () => {
     render(<StatusBadge status="PENDING" />);
-    expect(screen.getByText('pending')).toBeInTheDocument();
+    expect(screen.getByText("pending")).toBeInTheDocument();
   });
 
-  it('renders WON status correctly', () => {
+  it("renders WON status correctly", () => {
     render(<StatusBadge status="WON" />);
-    expect(screen.getByText('won')).toBeInTheDocument();
+    expect(screen.getByText("won")).toBeInTheDocument();
   });
 
-  it('renders LOST status correctly', () => {
+  it("renders LOST status correctly", () => {
     render(<StatusBadge status="LOST" />);
-    expect(screen.getByText('lost')).toBeInTheDocument();
+    expect(screen.getByText("lost")).toBeInTheDocument();
   });
 });
