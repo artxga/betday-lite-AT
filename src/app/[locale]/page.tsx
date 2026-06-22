@@ -3,7 +3,6 @@ import type { HourGroup, BetPick } from "@/lib/types";
 import { getTranslations } from "next-intl/server";
 import { auth } from "@/auth";
 import { getUserBets } from "@/lib/data/bets-store";
-import styles from "./page.module.css";
 
 // Force dynamic so that the latest bets state is fetched immediately
 export const dynamic = "force-dynamic";
@@ -43,19 +42,19 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   );
 
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <div className={styles.headerContent}>
-            <h1 className={styles.title}>
-              {t("title").split(" ")[0]} {t("title").split(" ")[1]} <span className={styles.titleAccent}>{t("title").split(" ").slice(2).join(" ")}</span>
+    <div className="pt-lg pb-3xl">
+      <div className="max-w-[1200px] mx-auto px-md">
+        <header className="flex justify-between items-end mb-2xl pb-lg border-b border-border-subtle max-md:flex-col max-md:items-start max-md:gap-md">
+          <div className="flex flex-col gap-sm">
+            <h1 className="font-heading text-4xl max-md:text-3xl font-extrabold tracking-[-1px] leading-[1.1]">
+              {t("title").split(" ")[0]} {t("title").split(" ")[1]} <span className="bg-gradient-to-br from-accent-primary to-accent-blue bg-clip-text text-transparent">{t("title").split(" ").slice(2).join(" ")}</span>
             </h1>
-            <p className={styles.subtitle}>
+            <p className="text-sm text-text-secondary">
               {t("description")}: {totalMatches}
             </p>
           </div>
-          <div className={styles.dateBadge}>
-            <span className={styles.dateIcon}>📅</span>
+          <div className="flex items-center gap-sm px-md py-sm bg-bg-surface border border-border-subtle rounded-full text-sm text-text-secondary whitespace-nowrap">
+            <span className="text-base">📅</span>
             <span>
               {new Date().toLocaleDateString(locale === "es" ? "es-ES" : "en-US", {
                 weekday: "long",

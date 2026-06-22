@@ -4,7 +4,6 @@ import { getAllBetsForUser } from "@/lib/data/bets-store";
 import BetCard from "@/components/BetCard";
 import EmptyState from "@/components/EmptyState";
 import { getTranslations } from "next-intl/server";
-import styles from "./page.module.css";
 
 export const dynamic = "force-dynamic";
 
@@ -40,14 +39,14 @@ export default async function ProfilePage({ params }: { params: Promise<{locale:
   };
 
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <header className={styles.header}>
+    <div className="pt-lg pb-3xl">
+      <div className="max-w-[900px] mx-auto px-md">
+        <header className="mb-xl pb-lg border-b border-border-subtle">
           <div>
-            <h1 className={styles.title}>
-              {t("title").split(" ")[0]} <span className={styles.titleAccent}>{t("title").split(" ").slice(1).join(" ")}</span>
+            <h1 className="font-heading text-4xl max-md:text-3xl font-extrabold tracking-[-1px] leading-[1.1] mb-xs">
+              {t("title").split(" ")[0]} <span className="bg-gradient-to-br from-accent-blue to-accent-purple bg-clip-text text-transparent">{t("title").split(" ").slice(1).join(" ")}</span>
             </h1>
-            <p className={styles.subtitle}>
+            <p className="text-sm text-text-secondary">
               {session.user.name
                 ? t("subtitleWithUser", { name: session.user.name })
                 : t("subtitleDefault")}
@@ -56,46 +55,46 @@ export default async function ProfilePage({ params }: { params: Promise<{locale:
         </header>
 
         {bets.length > 0 && (
-          <div className={styles.statsGrid}>
-            <div className={styles.statCard}>
-              <span className={styles.statValue}>{stats.total}</span>
-              <span className={styles.statLabel}>{t("stats.totalBets")}</span>
+          <div className="grid grid-cols-6 max-md:grid-cols-3 max-[480px]:grid-cols-2 gap-sm mb-2xl">
+            <div className="bg-bg-surface border border-border-subtle rounded-md p-md flex flex-col items-center gap-[4px] text-center">
+              <span className="font-heading text-2xl max-md:text-xl font-extrabold text-text-primary">{stats.total}</span>
+              <span className="text-[10px] text-text-muted uppercase tracking-[0.5px] font-semibold">{t("stats.totalBets")}</span>
             </div>
-            <div className={`${styles.statCard} ${styles.statWon}`}>
-              <span className={styles.statValue}>{stats.won}</span>
-              <span className={styles.statLabel}>{t("stats.won")}</span>
+            <div className="bg-bg-surface border border-border-subtle rounded-md p-md flex flex-col items-center gap-[4px] text-center">
+              <span className="font-heading text-2xl max-md:text-xl font-extrabold text-status-won">{stats.won}</span>
+              <span className="text-[10px] text-text-muted uppercase tracking-[0.5px] font-semibold">{t("stats.won")}</span>
             </div>
-            <div className={`${styles.statCard} ${styles.statLost}`}>
-              <span className={styles.statValue}>{stats.lost}</span>
-              <span className={styles.statLabel}>{t("stats.lost")}</span>
+            <div className="bg-bg-surface border border-border-subtle rounded-md p-md flex flex-col items-center gap-[4px] text-center">
+              <span className="font-heading text-2xl max-md:text-xl font-extrabold text-status-lost">{stats.lost}</span>
+              <span className="text-[10px] text-text-muted uppercase tracking-[0.5px] font-semibold">{t("stats.lost")}</span>
             </div>
-            <div className={`${styles.statCard} ${styles.statPending}`}>
-              <span className={styles.statValue}>{stats.pending}</span>
-              <span className={styles.statLabel}>{t("stats.pending")}</span>
+            <div className="bg-bg-surface border border-border-subtle rounded-md p-md flex flex-col items-center gap-[4px] text-center">
+              <span className="font-heading text-2xl max-md:text-xl font-extrabold text-status-pending">{stats.pending}</span>
+              <span className="text-[10px] text-text-muted uppercase tracking-[0.5px] font-semibold">{t("stats.pending")}</span>
             </div>
-            <div className={styles.statCard}>
-              <span className={styles.statValue}>
+            <div className="bg-bg-surface border border-border-subtle rounded-md p-md flex flex-col items-center gap-[4px] text-center">
+              <span className="font-heading text-2xl max-md:text-xl font-extrabold text-text-primary">
                 ${stats.totalStake.toFixed(0)}
               </span>
-              <span className={styles.statLabel}>{t("stats.totalStaked")}</span>
+              <span className="text-[10px] text-text-muted uppercase tracking-[0.5px] font-semibold">{t("stats.totalStaked")}</span>
             </div>
-            <div className={styles.statCard}>
+            <div className="bg-bg-surface border border-border-subtle rounded-md p-md flex flex-col items-center gap-[4px] text-center">
               <span
-                className={`${styles.statValue} ${
+                className={`font-heading text-2xl max-md:text-xl font-extrabold text-text-primary ${
                   stats.totalReturn > stats.totalStake
-                    ? styles.statValuePositive
-                    : styles.statValueNegative
+                    ? "!text-status-won"
+                    : "!text-status-lost"
                 }`}
               >
                 ${stats.totalReturn.toFixed(0)}
               </span>
-              <span className={styles.statLabel}>{t("stats.totalReturn")}</span>
+              <span className="text-[10px] text-text-muted uppercase tracking-[0.5px] font-semibold">{t("stats.totalReturn")}</span>
             </div>
           </div>
         )}
 
         {sortedBets.length > 0 ? (
-          <div className={styles.betsList}>
+          <div className="flex flex-col gap-md">
             {sortedBets.map((bet, index) => (
               <BetCard key={bet.id} bet={bet} index={index} />
             ))}

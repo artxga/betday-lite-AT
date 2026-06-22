@@ -8,7 +8,6 @@ import { useTranslations } from "next-intl";
 import type { Match, BetPick } from "@/lib/types";
 import BetButton from "./BetButton";
 import BetForm from "./BetForm";
-import styles from "./EventCard.module.css";
 
 interface EventCardProps {
   match: Match;
@@ -43,40 +42,38 @@ export default function EventCard({ match, userPick }: EventCardProps) {
     }
     
     if (placedPick) return;
-    
-    // Open the modal instead of redirecting
     setActivePickModal(pick);
   };
 
   const handleSuccess = (pick: BetPick) => {
     setPlacedPick(pick);
-    router.refresh(); // invalidate cache so the new bet appears in profile
+    router.refresh();
   };
 
   return (
     <>
-      <div className={`${styles.card} ${placedPick ? styles.cardBetPlaced : ""}`}>
-        <div className={styles.header}>
-          <span className={styles.league}>
-            <span className={styles.leagueDot} />
+      <div className={`bg-bg-glass backdrop-blur-[16px] border ${placedPick ? "border-border-accent pb-[calc(var(--spacing-lg)+28px)] max-md:pb-[calc(var(--spacing-md)+28px)]" : "border-border-subtle"} rounded-lg p-lg relative overflow-hidden transition-all duration-250 hover:border-border-light hover:-translate-y-[2px] hover:shadow-md max-md:p-md before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-accent-primary/30 before:to-transparent`}>
+        <div className="flex justify-between items-center mb-md">
+          <span className="flex items-center gap-[6px] text-xs font-semibold text-accent-purple uppercase tracking-[0.5px]">
+            <span className="w-[6px] h-[6px] rounded-full bg-accent-purple" />
             {match.league.name}
           </span>
-          <span className={styles.time}>{time}</span>
+          <span className="text-xs text-text-muted font-medium px-2 py-[2px] bg-bg-surface rounded-full">{time}</span>
         </div>
 
-        <div className={styles.teams}>
-          <div className={styles.team}>
-            <span className={styles.teamShort}>{match.homeTeam.shortName}</span>
-            <span className={styles.teamName}>{match.homeTeam.name}</span>
+        <div className="flex items-center justify-between gap-md mb-lg">
+          <div className="flex flex-1 flex-col gap-[2px]">
+            <span className="font-heading text-2xl font-extrabold tracking-[-0.5px] text-text-primary max-md:text-xl">{match.homeTeam.shortName}</span>
+            <span className="text-xs text-text-muted font-medium">{match.homeTeam.name}</span>
           </div>
-          <span className={styles.vs}>VS</span>
-          <div className={`${styles.team} ${styles.teamRight}`}>
-            <span className={styles.teamShort}>{match.awayTeam.shortName}</span>
-            <span className={styles.teamName}>{match.awayTeam.name}</span>
+          <span className="font-heading text-sm font-extrabold text-text-muted px-[10px] py-1 bg-bg-surface rounded-full shrink-0">VS</span>
+          <div className="flex flex-1 flex-col gap-[2px] text-right items-end">
+            <span className="font-heading text-2xl font-extrabold tracking-[-0.5px] text-text-primary max-md:text-xl">{match.awayTeam.shortName}</span>
+            <span className="text-xs text-text-muted font-medium">{match.awayTeam.name}</span>
           </div>
         </div>
 
-        <div className={styles.odds}>
+        <div className="grid grid-cols-3 gap-sm">
           <BetButton
             label="1"
             subLabel={match.homeTeam.shortName}
@@ -104,7 +101,7 @@ export default function EventCard({ match, userPick }: EventCardProps) {
         </div>
 
         {placedPick && (
-          <div className={styles.betPlacedBanner}>
+          <div className="absolute bottom-0 left-0 right-0 p-[6px] bg-accent-primary-dim text-accent-primary text-xs font-semibold text-center tracking-[0.5px]">
             {tCard("betPlacedBanner")}
           </div>
         )}

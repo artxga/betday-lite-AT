@@ -1,11 +1,9 @@
-import styles from "./page.module.css";
-
 export default function HomeLoading() {
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <div className={styles.headerContent}>
+    <div className="pt-lg pb-3xl">
+      <div className="max-w-[1200px] mx-auto px-md">
+        <header className="flex justify-between items-end mb-2xl pb-lg border-b border-border-subtle max-md:flex-col max-md:items-start max-md:gap-md">
+          <div className="flex flex-col gap-sm">
             <div className="skeleton" style={{ width: 280, height: 40, marginBottom: 8 }} />
             <div className="skeleton" style={{ width: 200, height: 18 }} />
           </div>

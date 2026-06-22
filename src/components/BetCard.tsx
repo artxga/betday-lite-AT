@@ -5,7 +5,6 @@ import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import type { BetWithMatch, BetPick } from "@/lib/types";
 import StatusBadge from "./StatusBadge";
-import styles from "./BetCard.module.css";
 
 interface BetCardProps {
   bet: BetWithMatch;
@@ -41,57 +40,57 @@ export default function BetCard({ bet, index }: BetCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.04, duration: 0.35 }}
     >
-      <Link href={`/bets/${bet.id}`} className={styles.card}>
-        <div className={styles.header}>
-          <div className={styles.matchInfo}>
+      <Link href={`/bets/${bet.id}`} className="block bg-bg-glass backdrop-blur-[16px] border border-border-subtle rounded-lg p-lg max-md:p-md relative overflow-hidden cursor-pointer transition-all duration-250 hover:border-border-light hover:-translate-y-[2px] hover:shadow-md before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-accent-blue/30 before:to-transparent">
+        <div className="flex justify-between items-start mb-md">
+          <div className="flex flex-col gap-1">
             {bet.match && (
               <>
-                <span className={styles.league}>
-                  <span className={styles.leagueDot} />
+                <span className="flex items-center gap-[6px] text-xs font-semibold text-accent-purple uppercase tracking-[0.5px]">
+                  <span className="w-[6px] h-[6px] rounded-full bg-accent-purple" />
                   {bet.match.league.name}
                 </span>
-                <span className={styles.matchTime}>{matchTime}</span>
+                <span className="text-xs text-text-muted">{matchTime}</span>
               </>
             )}
           </div>
           <StatusBadge status={bet.status} />
         </div>
 
-        <div className={styles.teams}>
+        <div className="flex items-center gap-sm mb-lg">
           {bet.match ? (
             <>
-              <span className={styles.teamName}>{bet.match.homeTeam.name}</span>
-              <span className={styles.vsText}>{t("vs")}</span>
-              <span className={styles.teamName}>{bet.match.awayTeam.name}</span>
+              <span className="font-heading text-lg max-md:text-base font-bold text-text-primary">{bet.match.homeTeam.name}</span>
+              <span className="text-sm text-text-muted font-medium">{t("vs")}</span>
+              <span className="font-heading text-lg max-md:text-base font-bold text-text-primary">{bet.match.awayTeam.name}</span>
             </>
           ) : (
-            <span className={styles.teamName}>{t("match", { id: bet.matchId })}</span>
+            <span className="font-heading text-lg max-md:text-base font-bold text-text-primary">{t("match", { id: bet.matchId })}</span>
           )}
         </div>
 
-        <div className={styles.footer}>
-          <div className={styles.pickInfo}>
-            <span className={styles.pickBadge}>{pickLabels[bet.pick]}</span>
-            <span className={styles.pickLabel}>{bet.pick}</span>
+        <div className="flex items-center gap-lg max-md:gap-md flex-wrap">
+          <div className="flex items-center gap-sm">
+            <span className="w-8 h-8 rounded-md bg-accent-primary-dim border border-border-accent flex items-center justify-center font-heading font-extrabold text-sm text-accent-primary">{pickLabels[bet.pick]}</span>
+            <span className="text-xs text-text-secondary font-medium uppercase">{bet.pick}</span>
           </div>
 
-          <div className={styles.betDetails}>
-            <div className={styles.detail}>
-              <span className={styles.detailLabel}>{t("odds")}</span>
-              <span className={styles.detailValue}>{bet.odd.toFixed(2)}</span>
+          <div className="flex gap-lg max-md:gap-md flex-1">
+            <div className="flex flex-col gap-[2px]">
+              <span className="text-[10px] text-text-muted uppercase tracking-[0.5px] font-medium">{t("odds")}</span>
+              <span className="text-sm font-bold text-text-primary">{bet.odd.toFixed(2)}</span>
             </div>
-            <div className={styles.detail}>
-              <span className={styles.detailLabel}>{t("stake")}</span>
-              <span className={styles.detailValue}>${bet.stake}</span>
+            <div className="flex flex-col gap-[2px]">
+              <span className="text-[10px] text-text-muted uppercase tracking-[0.5px] font-medium">{t("stake")}</span>
+              <span className="text-sm font-bold text-text-primary">${bet.stake}</span>
             </div>
-            <div className={styles.detail}>
-              <span className={styles.detailLabel}>{t("return")}</span>
+            <div className="flex flex-col gap-[2px]">
+              <span className="text-[10px] text-text-muted uppercase tracking-[0.5px] font-medium">{t("return")}</span>
               <span
-                className={`${styles.detailValue} ${
+                className={`text-sm font-bold text-text-primary ${
                   bet.status === "WON"
-                    ? styles.returnWon
+                    ? "text-status-won"
                     : bet.status === "LOST"
-                      ? styles.returnLost
+                      ? "text-status-lost"
                       : ""
                 }`}
               >
@@ -100,7 +99,7 @@ export default function BetCard({ bet, index }: BetCardProps) {
             </div>
           </div>
 
-          <div className={styles.placedAt}>{placedDate}</div>
+          <div className="text-xs text-text-muted ml-auto max-md:w-full max-md:ml-0 max-md:pt-sm max-md:border-t max-md:border-border-subtle">{placedDate}</div>
         </div>
       </Link>
     </motion.div>

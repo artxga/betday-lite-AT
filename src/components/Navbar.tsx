@@ -5,7 +5,6 @@ import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 import { Zap, Menu } from "lucide-react";
-import styles from "./Navbar.module.css";
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -46,33 +45,37 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={styles.nav}>
-      <div className={styles.navInner}>
-        <div className={styles.mobileLogo}>
-          <Link href="/" className={styles.logo}>
-            <div className={styles.logoIcon}>
+    <nav className="fixed top-0 left-0 right-0 z-[100] bg-[rgba(10,10,26,0.8)] backdrop-blur-[20px] border-b border-border-subtle">
+      <div className="max-w-[1200px] mx-auto px-md flex items-center justify-end h-[64px] max-md:justify-end">
+        <div className="hidden max-md:flex mr-auto">
+          <Link href="/" className="font-heading text-xl font-extrabold tracking-[-0.5px] flex items-center gap-sm">
+            <div className="w-8 h-8 rounded-md bg-gradient-to-br from-accent-primary to-accent-blue flex items-center justify-center text-sm font-extrabold text-bg-primary">
               <Zap size={16} />
             </div>
             <span>
-              <span className={styles.logoText}>{t("title").split(" ")[0]}</span>
-              <span className={styles.logoTextDim}> {t("title").split(" ")[1]}</span>
+              <span className="bg-gradient-to-br from-accent-primary to-accent-blue bg-clip-text text-transparent">{t("title").split(" ")[0]}</span>
+              <span className="text-text-secondary font-medium"> {t("title").split(" ")[1]}</span>
             </span>
           </Link>
         </div>
 
-        <div className={styles.navActions}>
-          <button className={styles.langBtn} onClick={toggleLocale} aria-label="Toggle language">
+        <div className="flex items-center gap-md">
+          <button 
+            className="px-sm py-xs rounded-sm text-xs font-semibold text-text-secondary border border-border-subtle bg-transparent cursor-pointer transition-all duration-150 flex items-center justify-center min-w-[40px] h-8 hover:text-accent-primary hover:border-accent-primary hover:bg-accent-primary/5" 
+            onClick={toggleLocale} 
+            aria-label="Toggle language"
+          >
             {locale.toUpperCase()}
           </button>
           
           {session?.user ? (
-            <div className={styles.userDropdownContainer}>
+            <div className="relative">
               <button 
-                className={styles.avatarBtn} 
+                className="w-9 h-9 rounded-full bg-gradient-to-br from-accent-purple to-accent-blue flex items-center justify-center text-xs font-bold text-white overflow-hidden border-2 border-border-subtle transition-colors duration-150 hover:border-accent-primary" 
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 {session.user.image ? (
-                  <img src={session.user.image} alt={session.user.name || "Avatar"} />
+                  <img src={session.user.image} alt={session.user.name || "Avatar"} className="w-full h-full object-cover" />
                 ) : (
                   getInitials(session.user.name)
                 )}
@@ -80,13 +83,13 @@ export default function Navbar() {
               
               {dropdownOpen && (
                 <>
-                  <div className={styles.dropdownOverlay} onClick={() => setDropdownOpen(false)} />
-                  <div className={styles.dropdownMenu}>
-                    <div className={styles.dropdownHeader}>
-                      <span className={styles.userName}>{session.user.name}</span>
-                      <span className={styles.userEmail}>{session.user.email}</span>
+                  <div className="fixed inset-0 z-10" onClick={() => setDropdownOpen(false)} />
+                  <div className="absolute top-[calc(100%+var(--spacing-sm))] right-0 w-[220px] bg-bg-secondary border border-border-subtle rounded-md shadow-lg p-sm z-[11] flex flex-col gap-sm">
+                    <div className="flex flex-col p-sm border-b border-border-subtle">
+                      <span className="text-sm font-semibold text-text-primary truncate">{session.user.name}</span>
+                      <span className="text-xs text-text-muted truncate">{session.user.email}</span>
                     </div>
-                    <button className={styles.signOutBtn} onClick={() => signOut()}>
+                    <button className="p-sm rounded-sm text-sm font-medium text-status-lost bg-transparent transition-all duration-150 text-left w-full hover:bg-status-lost-bg" onClick={() => signOut()}>
                       {t("logout")}
                     </button>
                   </div>
@@ -94,13 +97,13 @@ export default function Navbar() {
               )}
             </div>
           ) : (
-            <Link href="/auth/signin" className={styles.signInBtn}>
+            <Link href="/auth/signin" className="px-md py-xs rounded-sm text-sm font-semibold bg-gradient-to-br from-accent-primary to-[#00cc6a] text-bg-primary transition-all duration-150 hover:-translate-y-[1px] hover:shadow-glow">
               {t("login")}
             </Link>
           )}
 
           <button
-            className={styles.hamburger}
+            className="hidden max-md:flex p-xs cursor-pointer text-text-secondary bg-transparent border-none items-center justify-center transition-colors duration-150 hover:text-text-primary"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >

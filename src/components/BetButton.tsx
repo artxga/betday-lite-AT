@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import styles from "./BetButton.module.css";
 
 interface BetButtonProps {
   label: string;
@@ -22,7 +21,7 @@ export default function BetButton({
 }: BetButtonProps) {
   return (
     <motion.button
-      className={`${styles.btn} ${isSelected ? styles.selected : ""} ${isDisabled && !isSelected ? styles.disabled : ""}`}
+      className={`flex flex-col items-center justify-center gap-[2px] py-sm px-xs bg-bg-surface border border-border-subtle rounded-md transition-all duration-150 min-h-[68px] max-md:px-[2px] max-md:min-h-[60px] ${isSelected ? "!bg-accent-primary-dim !border-accent-primary" : ""} ${isDisabled && !isSelected ? "opacity-40 cursor-not-allowed" : "cursor-pointer hover:bg-bg-surface-hover hover:border-accent-primary hover:shadow-[0_0_12px_rgba(0,255,135,0.15)]"}`}
       onClick={onClick}
       disabled={isDisabled}
       whileHover={!isDisabled ? { scale: 1.04 } : undefined}
@@ -44,9 +43,9 @@ export default function BetButton({
           : { duration: 0.15 }
       }
     >
-      <span className={styles.label}>{label}</span>
-      <span className={styles.subLabel}>{subLabel}</span>
-      <span className={styles.odd}>{odd.toFixed(2)}</span>
+      <span className={`font-heading text-lg font-extrabold max-md:text-base ${isSelected ? "text-accent-primary" : "text-text-primary"}`}>{label}</span>
+      <span className="text-[10px] text-text-muted font-medium uppercase tracking-[0.3px]">{subLabel}</span>
+      <span className="text-sm font-bold text-accent-primary mt-[2px] max-md:text-xs">{odd.toFixed(2)}</span>
     </motion.button>
   );
 }
