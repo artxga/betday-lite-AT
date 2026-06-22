@@ -12,7 +12,7 @@ async function getEvents(): Promise<HourGroup[]> {
   return res.json();
 }
 
-export default async function HomePage({ params }: { params: Promise<{locale: string}> }) {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "HomePage" });
   let hourGroups: HourGroup[];
@@ -39,7 +39,7 @@ export default async function HomePage({ params }: { params: Promise<{locale: st
               {t("title").split(" ")[0]} {t("title").split(" ")[1]} <span className={styles.titleAccent}>{t("title").split(" ").slice(2).join(" ")}</span>
             </h1>
             <p className={styles.subtitle}>
-              {t("description")} ({totalMatches} events)
+              {t("description")}: {totalMatches}
             </p>
           </div>
           <div className={styles.dateBadge}>

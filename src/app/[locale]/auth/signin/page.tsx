@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { Zap } from "lucide-react";
 import styles from "./page.module.css";
 
 export default function SignInPage() {
