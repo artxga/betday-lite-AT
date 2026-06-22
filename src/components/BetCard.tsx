@@ -40,7 +40,7 @@ export default function BetCard({ bet, index }: BetCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.04, duration: 0.35 }}
     >
-      <Link href={`/bets/${bet.id}`} className="block bg-bg-glass backdrop-blur-[16px] border border-border-subtle rounded-lg p-lg max-md:p-md relative overflow-hidden cursor-pointer transition-all duration-250 hover:border-border-light hover:-translate-y-[2px] hover:shadow-md before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-accent-blue/30 before:to-transparent">
+      <Link href={`/bets/${bet.id}`} className="block liquid-glass rounded-lg p-lg max-md:p-md relative overflow-hidden cursor-pointer transition-all duration-250 hover:border-white/10 hover:-translate-y-[2px] hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),inset_0_-1px_1px_rgba(255,255,255,0.05),0_12px_40px_rgba(0,0,0,0.5)] before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-accent-blue/30 before:to-transparent">
         <div className="flex justify-between items-start mb-md">
           <div className="flex flex-col gap-1">
             {bet.match && (

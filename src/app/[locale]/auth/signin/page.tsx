@@ -41,7 +41,7 @@ export default function SignInPage() {
 
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-80px)] p-lg">
-      <div className="w-full max-w-[420px] bg-bg-glass backdrop-blur-[24px] border border-border-subtle rounded-xl p-2xl max-[480px]:p-lg relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-accent-primary before:via-accent-blue before:to-accent-purple">
+      <div className="w-full max-w-[420px] liquid-glass rounded-xl p-2xl max-[480px]:p-lg relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-accent-primary before:via-accent-blue before:to-accent-purple">
         <div className="text-center mb-xl">
           <div className="w-[56px] h-[56px] rounded-lg bg-gradient-to-br from-accent-primary to-accent-blue flex items-center justify-center text-2xl mx-auto mb-lg">
             <Zap size={24} />
@@ -65,7 +65,7 @@ export default function SignInPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder={t("emailPlaceholder")}
-              className="px-4 py-3 bg-bg-surface border border-border-subtle rounded-md text-sm text-text-primary transition-all duration-150 outline-none focus:border-accent-primary focus:shadow-[0_0_0_3px_rgba(0,255,135,0.1)] placeholder:text-text-muted"
+              className="liquid-input px-4 py-3 rounded-md text-sm text-text-primary outline-none placeholder:text-text-muted"
               required
             />
           </div>
@@ -80,7 +80,7 @@ export default function SignInPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder={t("passwordPlaceholder")}
-              className="px-4 py-3 bg-bg-surface border border-border-subtle rounded-md text-sm text-text-primary transition-all duration-150 outline-none focus:border-accent-primary focus:shadow-[0_0_0_3px_rgba(0,255,135,0.1)] placeholder:text-text-muted"
+              className="liquid-input px-4 py-3 rounded-md text-sm text-text-primary outline-none placeholder:text-text-muted"
               required
             />
             <span className="text-xs text-text-muted italic">
@@ -92,7 +92,7 @@ export default function SignInPage() {
 
           <button
             type="submit"
-            className="p-3 bg-gradient-to-br from-accent-primary to-[#00cc6a] text-bg-primary text-sm font-bold rounded-md transition-all duration-150 flex items-center justify-center min-h-[44px] hover:not-disabled:-translate-y-[1px] hover:not-disabled:shadow-glow disabled:opacity-70 disabled:cursor-not-allowed"
+            className="liquid-button-primary p-3 text-sm font-bold rounded-md flex items-center justify-center min-h-[44px] disabled:opacity-70 disabled:cursor-not-allowed"
             disabled={loading}
           >
             {loading ? (
@@ -108,7 +108,7 @@ export default function SignInPage() {
         </div>
 
         <button
-          className="w-full p-3 bg-bg-surface border border-border-subtle rounded-md text-sm font-semibold text-text-primary flex items-center justify-center gap-sm transition-all duration-150 hover:bg-bg-surface-hover hover:border-border-light hover:-translate-y-[1px]"
+          className="w-full liquid-button p-3 rounded-md text-sm font-semibold text-text-primary flex items-center justify-center gap-sm"
           onClick={() => signIn("google", { callbackUrl: "/" })}
         >
           <svg width="18" height="18" viewBox="0 0 24 24">

@@ -91,7 +91,7 @@ export default function BetForm({ match, initialPick, onClose, onSuccess }: BetF
       <div className="absolute -top-[100px] -left-[100px] w-[300px] h-[300px] rounded-full blur-[100px] -z-10 opacity-30 bg-accent-purple pointer-events-none" />
       <div className="absolute -bottom-[100px] -right-[100px] w-[300px] h-[300px] rounded-full blur-[100px] -z-10 opacity-30 bg-accent-blue pointer-events-none" />
       
-      <div className="bg-bg-glass backdrop-blur-[16px] border border-border-subtle rounded-lg p-2xl w-full max-w-[450px] shadow-lg animate-slide-up relative z-10">
+      <div className="liquid-glass rounded-lg p-2xl w-full max-w-[450px] shadow-lg animate-slide-up relative z-10">
         <h1 className="font-heading text-3xl font-extrabold tracking-[-1px] mb-xl text-center bg-gradient-to-br from-white to-white/70 bg-clip-text text-transparent">{t("title")}</h1>
         
         <div className="flex flex-col gap-xs mb-xl text-center pb-md border-b border-border-subtle">
@@ -139,7 +139,7 @@ export default function BetForm({ match, initialPick, onClose, onSuccess }: BetF
               type="number"
               value={stake}
               onChange={(e) => setStake(e.target.value)}
-              className={`w-full bg-bg-surface border-2 rounded-md py-4 pr-4 pl-9 text-2xl font-extrabold text-text-primary outline-none transition-all duration-150 ${errorMessage ? "border-[#ff4757] focus:shadow-[0_0_0_4px_rgba(255,71,87,0.1)]" : "border-border-subtle focus:border-accent-purple focus:shadow-[0_0_0_4px_rgba(139,92,246,0.1)]"}`}
+              className={`w-full liquid-input rounded-md py-4 pr-4 pl-9 text-2xl font-extrabold text-text-primary outline-none ${errorMessage ? "border-[#ff4757] focus:shadow-[0_0_0_4px_rgba(255,71,87,0.15)]" : ""}`}
               disabled={isPlacing}
               autoFocus
             />
@@ -154,18 +154,18 @@ export default function BetForm({ match, initialPick, onClose, onSuccess }: BetF
 
         <div className="flex gap-md">
           <button 
-            className="flex-1 p-[14px] bg-transparent border border-border-subtle text-text-secondary rounded-md font-semibold text-base cursor-pointer transition-all duration-150 hover:bg-bg-surface hover:text-text-primary" 
+            className="flex-1 p-[14px] liquid-button text-text-secondary rounded-md font-semibold text-base cursor-pointer hover:text-text-primary disabled:opacity-50 disabled:cursor-not-allowed" 
             onClick={onClose}
             disabled={isPlacing}
           >
             {t("cancel")}
           </button>
           <button 
-            className="flex-[2] p-[14px] bg-gradient-to-br from-accent-purple to-accent-blue border-none text-white rounded-md font-bold text-base cursor-pointer transition-opacity duration-150 flex justify-center items-center hover:opacity-90 hover:-translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" 
+            className="flex-[2] p-[14px] liquid-button-primary rounded-md font-bold text-base cursor-pointer flex justify-center items-center disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" 
             onClick={handleConfirm}
             disabled={isPlacing || !isValidStake}
           >
-            {isPlacing ? <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> : t("confirmBet")}
+            {isPlacing ? <span className="w-5 h-5 border-2 border-bg-primary/30 border-t-bg-primary rounded-full animate-spin" /> : t("confirmBet")}
           </button>
         </div>
       </div>

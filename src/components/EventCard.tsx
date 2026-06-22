@@ -52,7 +52,7 @@ export default function EventCard({ match, userPick }: EventCardProps) {
 
   return (
     <>
-      <div className={`bg-bg-glass backdrop-blur-[16px] border ${placedPick ? "border-border-accent pb-[calc(var(--spacing-lg)+28px)] max-md:pb-[calc(var(--spacing-md)+28px)]" : "border-border-subtle"} rounded-lg p-lg relative overflow-hidden transition-all duration-250 hover:border-border-light hover:-translate-y-[2px] hover:shadow-md max-md:p-md before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-accent-primary/30 before:to-transparent`}>
+      <div className={`liquid-glass ${placedPick ? "border-border-accent pb-[calc(var(--spacing-lg)+28px)] max-md:pb-[calc(var(--spacing-md)+28px)]" : ""} rounded-lg p-lg relative overflow-hidden transition-all duration-250 hover:border-white/10 hover:-translate-y-[2px] hover:shadow-[inset_0_1px_1px_rgba(255,255,255,0.2),inset_0_-1px_1px_rgba(255,255,255,0.05),0_12px_40px_rgba(0,0,0,0.5)] max-md:p-md before:absolute before:inset-x-0 before:top-0 before:h-[1px] before:bg-gradient-to-r before:from-transparent before:via-accent-primary/30 before:to-transparent`}>
         <div className="flex justify-between items-center mb-md">
           <span className="flex items-center gap-[6px] text-xs font-semibold text-accent-purple uppercase tracking-[0.5px]">
             <span className="w-[6px] h-[6px] rounded-full bg-accent-purple" />

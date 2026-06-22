@@ -45,7 +45,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[100] bg-[rgba(10,10,26,0.8)] backdrop-blur-[20px] border-b border-border-subtle">
+    <nav className="fixed top-0 left-0 right-0 z-[100] liquid-panel !border-t-0 !border-l-0 !border-r-0 !rounded-none">
       <div className="max-w-[1200px] mx-auto px-md flex items-center justify-end h-[64px] max-md:justify-end">
         <div className="hidden max-md:flex mr-auto">
           <Link href="/" className="font-heading text-xl font-extrabold tracking-[-0.5px] flex items-center gap-sm">
@@ -61,7 +61,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-md">
           <button 
-            className="px-sm py-xs rounded-sm text-xs font-semibold text-text-secondary border border-border-subtle bg-transparent cursor-pointer transition-all duration-150 flex items-center justify-center min-w-[40px] h-8 hover:text-accent-primary hover:border-accent-primary hover:bg-accent-primary/5" 
+            className="liquid-button px-sm py-xs rounded-sm text-xs font-semibold text-text-secondary flex items-center justify-center min-w-[40px] h-8 hover:text-accent-primary" 
             onClick={toggleLocale} 
             aria-label="Toggle language"
           >
@@ -97,7 +97,7 @@ export default function Navbar() {
               )}
             </div>
           ) : (
-            <Link href="/auth/signin" className="px-md py-xs rounded-sm text-sm font-semibold bg-gradient-to-br from-accent-primary to-[#00cc6a] text-bg-primary transition-all duration-150 hover:-translate-y-[1px] hover:shadow-glow">
+            <Link href="/auth/signin" className="liquid-button-primary px-md py-xs rounded-sm text-sm font-semibold flex items-center justify-center">
               {t("login")}
             </Link>
           )}

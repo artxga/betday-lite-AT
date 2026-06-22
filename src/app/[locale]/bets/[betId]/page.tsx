@@ -51,7 +51,7 @@ export default async function BetDetailPage({
           {t("back")}
         </Link>
 
-        <div className="bg-bg-glass backdrop-blur-[20px] border border-border-subtle rounded-xl p-xl max-md:p-lg relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-accent-primary before:via-accent-blue before:to-accent-purple">
+        <div className="liquid-glass rounded-xl p-xl max-md:p-lg relative overflow-hidden before:absolute before:inset-x-0 before:top-0 before:h-[2px] before:bg-gradient-to-r before:from-accent-primary before:via-accent-blue before:to-accent-purple">
           <div className="flex justify-between items-center mb-xl">
             <h1 className="font-heading text-2xl font-extrabold">{t("title")}</h1>
             <StatusBadge status={bet.status} />

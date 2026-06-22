@@ -21,7 +21,11 @@ export default function BetButton({
 }: BetButtonProps) {
   return (
     <motion.button
-      className={`flex flex-col items-center justify-center gap-[2px] py-sm px-xs bg-bg-surface border border-border-subtle rounded-md transition-all duration-150 min-h-[68px] max-md:px-[2px] max-md:min-h-[60px] ${isSelected ? "!bg-accent-primary-dim !border-accent-primary" : ""} ${isDisabled && !isSelected ? "opacity-40 cursor-not-allowed" : "cursor-pointer hover:bg-bg-surface-hover hover:border-accent-primary hover:shadow-[0_0_12px_rgba(0,255,135,0.15)]"}`}
+      className={`flex flex-col items-center justify-center gap-[2px] p-sm rounded-md flex-1 ${
+        isSelected
+          ? "liquid-button !border-accent-primary !bg-[rgba(0,255,135,0.15)] !shadow-[inset_0_1px_2px_rgba(255,255,255,0.3),0_8px_24px_rgba(0,255,135,0.3)] scale-[1.02]"
+          : "liquid-button"
+      } ${isDisabled && !isSelected ? "opacity-40 cursor-not-allowed" : "cursor-pointer"}`}
       onClick={onClick}
       disabled={isDisabled}
       whileHover={!isDisabled ? { scale: 1.04 } : undefined}

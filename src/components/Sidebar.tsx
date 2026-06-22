@@ -36,7 +36,7 @@ export default function Sidebar() {
         className="hidden [.sidebar-open_&]:block fixed inset-0 bg-black/50 backdrop-blur-[4px] z-[109]" 
         onClick={() => document.body.classList.remove("sidebar-open")}
       />
-      <aside className={`fixed top-0 left-0 bottom-0 bg-[rgba(10,10,26,0.95)] backdrop-blur-[20px] border-r border-border-subtle z-[110] flex flex-col py-lg transition-all duration-250 shadow-lg overflow-visible ${isExpanded ? "w-[240px]" : "w-[72px]"} max-md:w-[280px] max-md:-translate-x-full [.sidebar-open_&]:max-md:translate-x-0`}>
+      <aside className={`fixed top-0 left-0 bottom-0 liquid-panel !border-t-0 !border-b-0 !border-l-0 !rounded-none z-[110] flex flex-col py-lg transition-all duration-250 shadow-lg overflow-visible ${isExpanded ? "w-[240px]" : "w-[72px]"} max-md:w-[280px] max-md:-translate-x-full [.sidebar-open_&]:max-md:translate-x-0`}>
         <div className="flex items-center justify-between px-md mb-xl overflow-hidden">
           <div className="flex items-center gap-sm">
             <div className="w-8 h-8 rounded-md bg-gradient-to-br from-accent-primary to-accent-blue flex items-center justify-center text-xs font-extrabold text-bg-primary shrink-0">
