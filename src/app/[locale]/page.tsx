@@ -1,7 +1,12 @@
 import Timeline from "@/components/Timeline";
-import type { HourGroup } from "@/lib/types";
+import type { HourGroup, BetPick } from "@/lib/types";
 import { getTranslations } from "next-intl/server";
+import { auth } from "@/auth";
+import { getUserBets } from "@/lib/data/bets-store";
 import styles from "./page.module.css";
+
+// Force dynamic so that the latest bets state is fetched immediately
+export const dynamic = "force-dynamic";
 
 async function getEvents(): Promise<HourGroup[]> {
   const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
@@ -24,6 +29,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     const { getMatchesGroupedByHour } = await import("@/lib/data/matches");
     hourGroups = getMatchesGroupedByHour();
   }
+
+  const session = await auth();
+  const userBets = session?.user?.id ? getUserBets(session.user.id) : [];
+  const userPicks = userBets.reduce((acc, bet) => {
+    acc[bet.matchId] = bet.pick;
+    return acc;
+  }, {} as Record<string, BetPick>);
 
   const totalMatches = hourGroups.reduce(
     (sum, group) => sum + group.matches.length,
@@ -54,7 +66,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </header>
 
-        <Timeline hourGroups={hourGroups} />
+        <Timeline hourGroups={hourGroups} userPicks={userPicks} />
       </div>
     </div>
   );

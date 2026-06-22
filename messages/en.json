@@ -32,8 +32,8 @@
     "emailLabel": "Email",
     "emailPlaceholder": "your@email.com",
     "passwordLabel": "Password",
-    "passwordPlaceholder": "Enter password",
-    "passwordHint": "Hint: use \"password\" as the password",
+    "passwordPlaceholder": "Enter your password",
+    "passwordHint": "Demo: demo@betday.com / password",
     "signInBtn": "Sign In",
     "or": "or",
     "googleBtn": "Continue with Google",
@@ -61,20 +61,23 @@
     "won": "Won",
     "lost": "Lost",
     "draw": "Draw",
+    "cancel": "Cancel",
     "emptyState": {
       "title": "No bets yet",
       "description": "You haven't placed any bets yet. Head to the home page and start betting on today's matches!",
       "cta": "Browse Matches"
     },
     "eventCard": {
-      "signIn": "Sign in to place bets",
-      "signInDesc": "You need to be logged in to place bets.",
+      "signIn": "Sign In Required",
+      "signInDesc": "You need to be signed in to place a bet.",
       "signInBtn": "Sign In",
+      "success": "Bet Placed!",
       "failed": "Failed to place bet",
-      "failedDesc": "Please try again.",
-      "success": "Bet placed! 🎉",
-      "successDesc": "${stake} on {pick} @ {odds}",
-      "betPlacedBanner": "✅ Bet placed"
+      "failedDesc": "Please try again later.",
+      "betPlacedBanner": "You have a pending bet for this match",
+      "stakeAmount": "Stake Amount:",
+      "confirmBet": "Confirm Bet",
+      "invalidStake": "Please enter a valid amount"
     },
     "betCard": {
       "match": "Match {id}",
@@ -82,6 +85,18 @@
       "stake": "Stake",
       "return": "Return",
       "vs": "vs"
+    },
+    "betDetail": {
+      "title": "Bet Detail",
+      "match": "Match",
+      "pick": "Your Pick",
+      "odds": "Odds",
+      "stake": "Stake Amount ($)",
+      "potentialReturn": "Potential Return",
+      "confirmBet": "Confirm Bet",
+      "cancel": "Cancel",
+      "minBet": "Minimum bet is $1",
+      "maxBet": "Maximum bet is $10,000"
     }
   }
 }

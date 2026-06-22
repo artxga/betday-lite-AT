@@ -2,18 +2,25 @@ import type { Bet, BetPick, BetWithMatch } from "@/lib/types";
 import { getMatchById } from "./matches";
 import betsData from "../../../bets.me.50.json";
 
-// In-memory store: userId → Bet[]
-const store = new Map<string, Bet[]>();
+const globalStore = globalThis as unknown as {
+  _betStore: Map<string, Bet[]>;
+  _betCounter: number;
+};
 
-// Seed the demo user with mock data
-const DEMO_USER_ID = "demo-user";
-store.set(DEMO_USER_ID, [...(betsData.bets as Bet[])]);
+if (!globalStore._betStore) {
+  globalStore._betStore = new Map<string, Bet[]>();
+  globalStore._betCounter = 100;
+  
+  // Seed the demo user with mock data
+  const DEMO_USER_ID = "demo-user";
+  globalStore._betStore.set(DEMO_USER_ID, [...(betsData.bets as Bet[])]);
+}
 
-let betCounter = 100;
+const store = globalStore._betStore;
 
 function generateBetId(): string {
-  betCounter++;
-  return `bet_${betCounter.toString().padStart(3, "0")}`;
+  globalStore._betCounter++;
+  return `bet_${globalStore._betCounter.toString().padStart(3, "0")}`;
 }
 
 export function getUserBets(userId: string): Bet[] {

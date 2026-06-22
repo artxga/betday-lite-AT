@@ -32,8 +32,8 @@
     "emailLabel": "Correo",
     "emailPlaceholder": "tu@email.com",
     "passwordLabel": "Contraseña",
-    "passwordPlaceholder": "Ingresa contraseña",
-    "passwordHint": "Pista: usa \"password\" como contraseña",
+    "passwordPlaceholder": "Ingresa tu contraseña",
+    "passwordHint": "Demo: demo@betday.com / password",
     "signInBtn": "Iniciar Sesión",
     "or": "o",
     "googleBtn": "Continuar con Google",
@@ -67,14 +67,16 @@
       "cta": "Explorar Partidos"
     },
     "eventCard": {
-      "signIn": "Inicia sesión para apostar",
-      "signInDesc": "Debes estar logueado para realizar apuestas.",
+      "signIn": "Inicia Sesión",
+      "signInDesc": "Debes iniciar sesión para poder apostar.",
       "signInBtn": "Iniciar Sesión",
-      "failed": "Error al realizar apuesta",
+      "success": "¡Apuesta Realizada!",
+      "failed": "Error al apostar",
       "failedDesc": "Por favor intenta de nuevo.",
-      "success": "¡Apuesta realizada! 🎉",
-      "successDesc": "${stake} a {pick} @ {odds}",
-      "betPlacedBanner": "✅ Apuesta realizada"
+      "betPlacedBanner": "Ya tienes una apuesta pendiente en este evento",
+      "stakeAmount": "Monto de Apuesta:",
+      "confirmBet": "Confirmar Apuesta",
+      "invalidStake": "Por favor ingresa un monto válido"
     },
     "betCard": {
       "match": "Partido {id}",
@@ -82,6 +84,18 @@
       "stake": "Monto",
       "return": "Retorno",
       "vs": "vs"
+    },
+    "betDetail": {
+      "title": "Detalle de Apuesta",
+      "match": "Partido",
+      "pick": "Tu Selección",
+      "odds": "Cuota",
+      "stake": "Monto de Apuesta ($)",
+      "potentialReturn": "Retorno Potencial",
+      "confirmBet": "Confirmar Apuesta",
+      "cancel": "Cancelar",
+      "minBet": "La apuesta mínima es de $1",
+      "maxBet": "La apuesta máxima es de $10,000"
     }
   }
 }

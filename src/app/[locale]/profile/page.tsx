@@ -6,6 +6,8 @@ import EmptyState from "@/components/EmptyState";
 import { getTranslations } from "next-intl/server";
 import styles from "./page.module.css";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "My Bets — BetDay Lite",
   description: "View your betting history and track your results.",

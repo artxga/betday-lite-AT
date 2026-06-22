@@ -8,9 +8,10 @@ import styles from "./Timeline.module.css";
 
 interface TimelineProps {
   hourGroups: HourGroup[];
+  userPicks?: Record<string, string>;
 }
 
-export default function Timeline({ hourGroups }: TimelineProps) {
+export default function Timeline({ hourGroups, userPicks = {} }: TimelineProps) {
   const t = useTranslations("Components");
   return (
     <div className={styles.timeline}>
@@ -43,7 +44,7 @@ export default function Timeline({ hourGroups }: TimelineProps) {
                   duration: 0.35,
                 }}
               >
-                <EventCard match={match} />
+                <EventCard match={match} userPick={userPicks[match.id]} />
               </motion.div>
             ))}
           </div>

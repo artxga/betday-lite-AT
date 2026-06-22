@@ -21,7 +21,7 @@ export default {
         // Accept any email with password "password"
         if (password === "password") {
           return {
-            id: "demo-user",
+            id: email === "demo@betday.com" ? "demo-user" : email,
             name: email.split("@")[0],
             email: email,
             image: null,
