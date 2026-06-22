@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import EmptyState from "../EmptyState";
+import EmptyState from "../../ui/EmptyState";
 
 describe("EmptyState", () => {
   it("renders with default translations", () => {

@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import { redirect, notFound } from "next/navigation";
 import { getBetById } from "@/lib/data/bets-store";
 import { Link } from "@/i18n/routing";
-import StatusBadge from "@/components/StatusBadge";
+import StatusBadge from "@/components/ui/StatusBadge";
 import type { BetPick } from "@/lib/types";
 import { getTranslations } from "next-intl/server";
 

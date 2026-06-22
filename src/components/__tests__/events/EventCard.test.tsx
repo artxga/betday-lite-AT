@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import EventCard from "../EventCard";
+import EventCard from "../../events/EventCard";
 import type { Match } from "@/lib/types";
 
 const mockMatch: Match = {

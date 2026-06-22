@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 import type { Match, BetPick } from "@/lib/types";
-import BetButton from "./BetButton";
-import BetForm from "./BetForm";
+import BetButton from "../ui/BetButton";
+import BetForm from "../bets/BetForm";
 
 interface EventCardProps {
   match: Match;

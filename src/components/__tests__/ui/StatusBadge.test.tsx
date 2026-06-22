@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import StatusBadge from "../StatusBadge";
+import StatusBadge from "../../ui/StatusBadge";
 
 describe("StatusBadge", () => {
   it("renders PENDING status correctly", () => {

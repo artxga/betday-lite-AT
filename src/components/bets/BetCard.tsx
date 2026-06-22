@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 import type { BetWithMatch, BetPick } from "@/lib/types";
-import StatusBadge from "./StatusBadge";
+import StatusBadge from "../ui/StatusBadge";
 
 interface BetCardProps {
   bet: BetWithMatch;

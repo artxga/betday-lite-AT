@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import BetButton from "../BetButton";
+import BetButton from "../../ui/BetButton";
 
 describe("BetButton", () => {
   const defaultProps = {

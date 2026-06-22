@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import type { Match, BetPick } from "@/lib/types";
-import BetButton from "./BetButton";
+import BetButton from "../ui/BetButton";
 
 interface BetFormProps {
   match: Match;

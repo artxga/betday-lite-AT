@@ -1,8 +1,8 @@
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { getAllBetsForUser } from "@/lib/data/bets-store";
-import BetCard from "@/components/BetCard";
-import EmptyState from "@/components/EmptyState";
+import BetCard from "@/components/bets/BetCard";
+import EmptyState from "@/components/ui/EmptyState";
 import { getTranslations } from "next-intl/server";
 
 export const dynamic = "force-dynamic";

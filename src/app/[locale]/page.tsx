@@ -1,4 +1,4 @@
-import Timeline from "@/components/Timeline";
+import Timeline from "@/components/events/Timeline";
 import type { HourGroup, BetPick } from "@/lib/types";
 import { getTranslations } from "next-intl/server";
 import { auth } from "@/auth";

@@ -3,9 +3,9 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import Providers from "@/components/Providers";
-import Navbar from "@/components/Navbar";
-import Sidebar from "@/components/Sidebar";
+import Providers from "@/components/providers/Providers";
+import Navbar from "@/components/layout/Navbar";
+import Sidebar from "@/components/layout/Sidebar";
 import "../globals.css";
 
 export const metadata: Metadata = {
