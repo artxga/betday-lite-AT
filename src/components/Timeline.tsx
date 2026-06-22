@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { HourGroup } from "@/lib/types";
+import { useTranslations } from "next-intl";
 import EventCard from "./EventCard";
 import styles from "./Timeline.module.css";
 
@@ -10,6 +11,7 @@ interface TimelineProps {
 }
 
 export default function Timeline({ hourGroups }: TimelineProps) {
+  const t = useTranslations("Components");
   return (
     <div className={styles.timeline}>
       <div className={styles.line} />
@@ -26,7 +28,7 @@ export default function Timeline({ hourGroups }: TimelineProps) {
             <div className={styles.dot} />
             <span className={styles.hourLabel}>{group.hourLabel}</span>
             <span className={styles.matchCount}>
-              {group.matches.length} {group.matches.length === 1 ? "match" : "matches"}
+              {group.matches.length} {group.matches.length === 1 ? t("match") : t("matches")}
             </span>
           </div>
 

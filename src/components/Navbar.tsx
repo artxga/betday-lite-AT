@@ -1,14 +1,17 @@
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/routing";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
   const { data: session } = useSession();
   const pathname = usePathname();
+  const router = useRouter();
+  const locale = useLocale();
+  const t = useTranslations("Navbar");
   const [menuOpen, setMenuOpen] = useState(false);
 
   const getInitials = (name?: string | null) => {
@@ -21,14 +24,19 @@ export default function Navbar() {
       .slice(0, 2);
   };
 
+  const toggleLocale = () => {
+    const nextLocale = locale === "en" ? "es" : "en";
+    router.replace(pathname, { locale: nextLocale });
+  };
+
   return (
     <nav className={styles.nav}>
       <div className={styles.navInner}>
         <Link href="/" className={styles.logo}>
           <div className={styles.logoIcon}>⚡</div>
           <span>
-            <span className={styles.logoText}>BetDay</span>
-            <span className={styles.logoTextDim}> Lite</span>
+            <span className={styles.logoText}>{t("title").split(" ")[0]}</span>
+            <span className={styles.logoTextDim}> {t("title").split(" ")[1]}</span>
           </span>
         </Link>
 
@@ -42,12 +50,15 @@ export default function Navbar() {
                 className={`${styles.navLink} ${pathname === "/profile" ? styles.navLinkActive : ""}`}
                 onClick={() => setMenuOpen(false)}
               >
-                👤 My Bets
+                👤 {t("myBets")}
               </Link>
             )}
           </div>
 
           <div className={styles.navActions}>
+            <button className={styles.langBtn} onClick={toggleLocale} aria-label="Toggle language" style={{ background: 'transparent', border: '1px solid #ddd', padding: '4px 8px', borderRadius: '4px', cursor: 'pointer', color: 'inherit' }}>
+              {locale.toUpperCase()}
+            </button>
             {session?.user ? (
               <>
                 <div className={styles.userInfo}>
@@ -67,7 +78,7 @@ export default function Navbar() {
                   className={styles.signOutBtn}
                   onClick={() => signOut()}
                 >
-                  Sign Out
+                  {t("logout")}
                 </button>
               </>
             ) : (
@@ -76,7 +87,7 @@ export default function Navbar() {
                 className={styles.signInBtn}
                 onClick={() => setMenuOpen(false)}
               >
-                Sign In
+                {t("login")}
               </Link>
             )}
           </div>

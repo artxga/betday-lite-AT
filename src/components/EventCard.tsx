@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 import type { Match, BetPick } from "@/lib/types";
 import BetButton from "./BetButton";
 import styles from "./EventCard.module.css";
@@ -13,6 +14,8 @@ interface EventCardProps {
 
 export default function EventCard({ match }: EventCardProps) {
   const { data: session } = useSession();
+  const tCard = useTranslations("Components.eventCard");
+  const tComp = useTranslations("Components");
   const [placedPick, setPlacedPick] = useState<BetPick | null>(null);
   const [isPlacing, setIsPlacing] = useState(false);
 
@@ -24,10 +27,10 @@ export default function EventCard({ match }: EventCardProps) {
 
   const handleBet = async (pick: BetPick) => {
     if (!session) {
-      toast.error("Sign in to place bets", {
-        description: "You need to be logged in to place bets.",
+      toast.error(tCard("signIn"), {
+        description: tCard("signInDesc"),
         action: {
-          label: "Sign In",
+          label: tCard("signInBtn"),
           onClick: () => (window.location.href = "/auth/signin"),
         },
       });
@@ -60,14 +63,14 @@ export default function EventCard({ match }: EventCardProps) {
           ? match.homeTeam.shortName
           : pick === "AWAY"
             ? match.awayTeam.shortName
-            : "Draw";
+            : tComp("draw");
 
-      toast.success("Bet placed! 🎉", {
+      toast.success(tCard("success"), {
         description: `$10 on ${pickLabel} @ ${match.market.odds[pick === "HOME" ? "home" : pick === "AWAY" ? "away" : "draw"]}`,
       });
     } catch {
-      toast.error("Failed to place bet", {
-        description: "Please try again.",
+      toast.error(tCard("failed"), {
+        description: tCard("failedDesc"),
       });
     } finally {
       setIsPlacing(false);
@@ -107,7 +110,7 @@ export default function EventCard({ match }: EventCardProps) {
         />
         <BetButton
           label="X"
-          subLabel="Draw"
+          subLabel={tComp("draw")}
           odd={match.market.odds.draw}
           isSelected={placedPick === "DRAW"}
           isDisabled={!!placedPick || isPlacing}
@@ -125,7 +128,7 @@ export default function EventCard({ match }: EventCardProps) {
 
       {placedPick && (
         <div className={styles.betPlacedBanner}>
-          ✅ Bet placed
+          {tCard("betPlacedBanner")}
         </div>
       )}
     </div>

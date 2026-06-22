@@ -1,30 +1,32 @@
 import { auth } from "@/auth";
 import { redirect, notFound } from "next/navigation";
 import { getBetById } from "@/lib/data/bets-store";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import StatusBadge from "@/components/StatusBadge";
 import type { BetPick } from "@/lib/types";
+import { getTranslations } from "next-intl/server";
 import styles from "./page.module.css";
-
-const pickLabels: Record<BetPick, { short: string; full: string }> = {
-  HOME: { short: "1", full: "Home Win" },
-  DRAW: { short: "X", full: "Draw" },
-  AWAY: { short: "2", full: "Away Win" },
-};
 
 export default async function BetDetailPage({
   params,
 }: {
-  params: Promise<{ betId: string }>;
+  params: Promise<{ betId: string; locale: string }>;
 }) {
   const session = await auth();
   if (!session?.user?.id) redirect("/auth/signin");
 
-  const { betId } = await params;
+  const { betId, locale } = await params;
+  const t = await getTranslations({ locale, namespace: "BetDetail" });
   const bet = getBetById(session.user.id, betId);
   if (!bet) notFound();
 
-  const placedDate = new Date(bet.placedAt).toLocaleDateString("en-US", {
+  const pickLabels: Record<BetPick, { short: string; full: string }> = {
+    HOME: { short: "1", full: t("homeWin") },
+    DRAW: { short: "X", full: t("draw") },
+    AWAY: { short: "2", full: t("awayWin") },
+  };
+
+  const placedDate = new Date(bet.placedAt).toLocaleDateString(locale === "es" ? "es-ES" : "en-US", {
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -34,10 +36,10 @@ export default async function BetDetailPage({
   });
 
   const matchTime = bet.match
-    ? new Date(bet.match.startTime).toLocaleTimeString("en-US", {
+    ? new Date(bet.match.startTime).toLocaleTimeString(locale === "es" ? "es-ES" : "en-US", {
         hour: "2-digit",
         minute: "2-digit",
-        hour12: true,
+        hour12: locale !== "es",
       })
     : "";
 
@@ -47,12 +49,12 @@ export default async function BetDetailPage({
     <div className={styles.page}>
       <div className={styles.container}>
         <Link href="/profile" className={styles.backLink}>
-          ← Back to My Bets
+          {t("back")}
         </Link>
 
         <div className={styles.card}>
           <div className={styles.cardHeader}>
-            <h1 className={styles.title}>Bet Detail</h1>
+            <h1 className={styles.title}>{t("title")}</h1>
             <StatusBadge status={bet.status} />
           </div>
 
@@ -117,7 +119,7 @@ export default async function BetDetailPage({
 
           <div className={styles.detailsGrid}>
             <div className={styles.detailItem}>
-              <span className={styles.detailLabel}>Your Pick</span>
+              <span className={styles.detailLabel}>{t("yourPick")}</span>
               <div className={styles.pickDisplay}>
                 <span className={styles.pickBadgeLarge}>
                   {pickLabels[bet.pick].short}
@@ -129,26 +131,26 @@ export default async function BetDetailPage({
             </div>
 
             <div className={styles.detailItem}>
-              <span className={styles.detailLabel}>Odds</span>
+              <span className={styles.detailLabel}>{t("odds")}</span>
               <span className={styles.detailValueLarge}>
                 {bet.odd.toFixed(2)}
               </span>
             </div>
 
             <div className={styles.detailItem}>
-              <span className={styles.detailLabel}>Stake</span>
+              <span className={styles.detailLabel}>{t("stake")}</span>
               <span className={styles.detailValueLarge}>${bet.stake}</span>
             </div>
 
             <div className={styles.detailItem}>
-              <span className={styles.detailLabel}>Potential Return</span>
+              <span className={styles.detailLabel}>{t("potentialReturn")}</span>
               <span className={styles.detailValueLarge}>
                 ${potentialReturn}
               </span>
             </div>
 
             <div className={styles.detailItem}>
-              <span className={styles.detailLabel}>Actual Return</span>
+              <span className={styles.detailLabel}>{t("actualReturn")}</span>
               <span
                 className={`${styles.detailValueLarge} ${
                   bet.status === "WON"
@@ -163,13 +165,13 @@ export default async function BetDetailPage({
             </div>
 
             <div className={styles.detailItem}>
-              <span className={styles.detailLabel}>Placed At</span>
+              <span className={styles.detailLabel}>{t("placedAt")}</span>
               <span className={styles.detailValueSmall}>{placedDate}</span>
             </div>
           </div>
 
           <div className={styles.betId}>
-            <span className={styles.betIdLabel}>Bet ID</span>
+            <span className={styles.betIdLabel}>{t("betId")}</span>
             <code className={styles.betIdValue}>{bet.id}</code>
           </div>
         </div>

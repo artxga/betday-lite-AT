@@ -1,0 +1,86 @@
+{
+  "Navbar": {
+    "title": "BetDay Lite",
+    "home": "Home",
+    "matches": "Matches",
+    "myBets": "My Bets",
+    "profile": "Profile",
+    "login": "Sign In",
+    "logout": "Sign Out"
+  },
+  "HomePage": {
+    "title": "Today's Matches",
+    "description": "events available for betting today"
+  },
+  "Profile": {
+    "title": "My Bets",
+    "subtitleWithUser": "{name}'s betting history",
+    "subtitleDefault": "Your betting history",
+    "stats": {
+      "totalBets": "Total Bets",
+      "won": "Won",
+      "lost": "Lost",
+      "pending": "Pending",
+      "totalStaked": "Total Staked",
+      "totalReturn": "Total Return"
+    }
+  },
+  "SignIn": {
+    "title": "Welcome to BetDay",
+    "subtitle": "Sign in to place bets and track your results",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your@email.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter password",
+    "passwordHint": "Hint: use \"password\" as the password",
+    "signInBtn": "Sign In",
+    "or": "or",
+    "googleBtn": "Continue with Google",
+    "invalidCredentials": "Invalid credentials. Use any email with password: password",
+    "error": "Something went wrong. Please try again."
+  },
+  "BetDetail": {
+    "back": "← Back to My Bets",
+    "title": "Bet Detail",
+    "homeWin": "Home Win",
+    "draw": "Draw",
+    "awayWin": "Away Win",
+    "yourPick": "Your Pick",
+    "odds": "Odds",
+    "stake": "Stake",
+    "potentialReturn": "Potential Return",
+    "actualReturn": "Actual Return",
+    "placedAt": "Placed At",
+    "betId": "Bet ID"
+  },
+  "Components": {
+    "match": "match",
+    "matches": "matches",
+    "pending": "Pending",
+    "won": "Won",
+    "lost": "Lost",
+    "draw": "Draw",
+    "emptyState": {
+      "title": "No bets yet",
+      "description": "You haven't placed any bets yet. Head to the home page and start betting on today's matches!",
+      "cta": "Browse Matches"
+    },
+    "eventCard": {
+      "signIn": "Sign in to place bets",
+      "signInDesc": "You need to be logged in to place bets.",
+      "signInBtn": "Sign In",
+      "failed": "Failed to place bet",
+      "failedDesc": "Please try again.",
+      "success": "Bet placed! 🎉",
+      "successDesc": "${stake} on {pick} @ {odds}",
+      "betPlacedBanner": "✅ Bet placed"
+    },
+    "betCard": {
+      "match": "Match {id}",
+      "odds": "Odds",
+      "stake": "Stake",
+      "return": "Return",
+      "vs": "vs"
+    }
+  }
+}

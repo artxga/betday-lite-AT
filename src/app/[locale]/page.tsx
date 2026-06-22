@@ -1,5 +1,6 @@
 import Timeline from "@/components/Timeline";
 import type { HourGroup } from "@/lib/types";
+import { getTranslations } from "next-intl/server";
 import styles from "./page.module.css";
 
 async function getEvents(): Promise<HourGroup[]> {
@@ -11,7 +12,9 @@ async function getEvents(): Promise<HourGroup[]> {
   return res.json();
 }
 
-export default async function HomePage() {
+export default async function HomePage({ params }: { params: Promise<{locale: string}> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "HomePage" });
   let hourGroups: HourGroup[];
 
   try {
@@ -33,16 +36,16 @@ export default async function HomePage() {
         <header className={styles.header}>
           <div className={styles.headerContent}>
             <h1 className={styles.title}>
-              Today&apos;s <span className={styles.titleAccent}>Matches</span>
+              {t("title").split(" ")[0]} {t("title").split(" ")[1]} <span className={styles.titleAccent}>{t("title").split(" ").slice(2).join(" ")}</span>
             </h1>
             <p className={styles.subtitle}>
-              {totalMatches} events available for betting today
+              {t("description")} ({totalMatches} events)
             </p>
           </div>
           <div className={styles.dateBadge}>
             <span className={styles.dateIcon}>📅</span>
             <span>
-              {new Date().toLocaleDateString("en-US", {
+              {new Date().toLocaleDateString(locale === "es" ? "es-ES" : "en-US", {
                 weekday: "long",
                 month: "long",
                 day: "numeric",

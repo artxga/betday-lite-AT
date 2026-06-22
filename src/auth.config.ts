@@ -39,6 +39,7 @@ export default {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isProtected =
+        /^\/(en|es)\/(profile|bets)/.test(nextUrl.pathname) ||
         nextUrl.pathname.startsWith("/profile") ||
         nextUrl.pathname.startsWith("/bets");
 

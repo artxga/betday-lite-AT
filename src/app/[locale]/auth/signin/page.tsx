@@ -3,10 +3,12 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import styles from "./page.module.css";
 
 export default function SignInPage() {
   const router = useRouter();
+  const t = useTranslations("SignIn");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -25,13 +27,13 @@ export default function SignInPage() {
       });
 
       if (result?.error) {
-        setError("Invalid credentials. Use any email with password: password");
+        setError(t("invalidCredentials"));
       } else {
         router.push("/");
         router.refresh();
       }
     } catch {
-      setError("Something went wrong. Please try again.");
+      setError(t("error"));
     } finally {
       setLoading(false);
     }
@@ -43,24 +45,24 @@ export default function SignInPage() {
         <div className={styles.header}>
           <div className={styles.logoIcon}>⚡</div>
           <h1 className={styles.title}>
-            Welcome to <span className={styles.titleAccent}>BetDay</span>
+            {t("title").split(" ").slice(0, -1).join(" ")} <span className={styles.titleAccent}>{t("title").split(" ").pop()}</span>
           </h1>
           <p className={styles.subtitle}>
-            Sign in to place bets and track your results
+            {t("subtitle")}
           </p>
         </div>
 
         <form onSubmit={handleCredentialsLogin} className={styles.form}>
           <div className={styles.inputGroup}>
             <label htmlFor="email" className={styles.label}>
-              Email
+              {t("emailLabel")}
             </label>
             <input
               id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
+              placeholder={t("emailPlaceholder")}
               className={styles.input}
               required
             />
@@ -68,19 +70,19 @@ export default function SignInPage() {
 
           <div className={styles.inputGroup}>
             <label htmlFor="password" className={styles.label}>
-              Password
+              {t("passwordLabel")}
             </label>
             <input
               id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
+              placeholder={t("passwordPlaceholder")}
               className={styles.input}
               required
             />
             <span className={styles.hint}>
-              Hint: use &quot;password&quot; as the password
+              {t("passwordHint")}
             </span>
           </div>
 
@@ -94,13 +96,13 @@ export default function SignInPage() {
             {loading ? (
               <span className={styles.spinner} />
             ) : (
-              "Sign In"
+              t("signInBtn")
             )}
           </button>
         </form>
 
         <div className={styles.divider}>
-          <span>or</span>
+          <span>{t("or")}</span>
         </div>
 
         <button
@@ -125,7 +127,7 @@ export default function SignInPage() {
               fill="#EA4335"
             />
           </svg>
-          Continue with Google
+          {t("googleBtn")}
         </button>
       </div>
     </div>

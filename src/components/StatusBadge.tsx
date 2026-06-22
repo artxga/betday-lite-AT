@@ -1,17 +1,20 @@
 import type { BetStatus } from "@/lib/types";
+import { useTranslations } from "next-intl";
 import styles from "./StatusBadge.module.css";
 
 interface StatusBadgeProps {
   status: BetStatus;
 }
 
-const statusConfig: Record<BetStatus, { label: string; className: string }> = {
-  PENDING: { label: "Pending", className: "pending" },
-  WON: { label: "Won", className: "won" },
-  LOST: { label: "Lost", className: "lost" },
-};
-
 export default function StatusBadge({ status }: StatusBadgeProps) {
+  const t = useTranslations("Components");
+
+  const statusConfig: Record<BetStatus, { label: string; className: string }> = {
+    PENDING: { label: t("pending"), className: "pending" },
+    WON: { label: t("won"), className: "won" },
+    LOST: { label: t("lost"), className: "lost" },
+  };
+
   const config = statusConfig[status];
 
   return (

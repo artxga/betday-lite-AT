@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getAllBetsForUser } from "@/lib/data/bets-store";
 import BetCard from "@/components/BetCard";
 import EmptyState from "@/components/EmptyState";
+import { getTranslations } from "next-intl/server";
 import styles from "./page.module.css";
 
 export const metadata = {
@@ -10,7 +11,9 @@ export const metadata = {
   description: "View your betting history and track your results.",
 };
 
-export default async function ProfilePage() {
+export default async function ProfilePage({ params }: { params: Promise<{locale: string}> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Profile" });
   const session = await auth();
 
   if (!session?.user?.id) {
@@ -19,7 +22,6 @@ export default async function ProfilePage() {
 
   const bets = getAllBetsForUser(session.user.id);
 
-  // Sort bets by placedAt descending (most recent first)
   const sortedBets = [...bets].sort(
     (a, b) => new Date(b.placedAt).getTime() - new Date(a.placedAt).getTime()
   );
@@ -41,12 +43,12 @@ export default async function ProfilePage() {
         <header className={styles.header}>
           <div>
             <h1 className={styles.title}>
-              My <span className={styles.titleAccent}>Bets</span>
+              {t("title").split(" ")[0]} <span className={styles.titleAccent}>{t("title").split(" ").slice(1).join(" ")}</span>
             </h1>
             <p className={styles.subtitle}>
               {session.user.name
-                ? `${session.user.name}'s betting history`
-                : "Your betting history"}
+                ? t("subtitleWithUser", { name: session.user.name })
+                : t("subtitleDefault")}
             </p>
           </div>
         </header>
@@ -55,25 +57,25 @@ export default async function ProfilePage() {
           <div className={styles.statsGrid}>
             <div className={styles.statCard}>
               <span className={styles.statValue}>{stats.total}</span>
-              <span className={styles.statLabel}>Total Bets</span>
+              <span className={styles.statLabel}>{t("stats.totalBets")}</span>
             </div>
             <div className={`${styles.statCard} ${styles.statWon}`}>
               <span className={styles.statValue}>{stats.won}</span>
-              <span className={styles.statLabel}>Won</span>
+              <span className={styles.statLabel}>{t("stats.won")}</span>
             </div>
             <div className={`${styles.statCard} ${styles.statLost}`}>
               <span className={styles.statValue}>{stats.lost}</span>
-              <span className={styles.statLabel}>Lost</span>
+              <span className={styles.statLabel}>{t("stats.lost")}</span>
             </div>
             <div className={`${styles.statCard} ${styles.statPending}`}>
               <span className={styles.statValue}>{stats.pending}</span>
-              <span className={styles.statLabel}>Pending</span>
+              <span className={styles.statLabel}>{t("stats.pending")}</span>
             </div>
             <div className={styles.statCard}>
               <span className={styles.statValue}>
                 ${stats.totalStake.toFixed(0)}
               </span>
-              <span className={styles.statLabel}>Total Staked</span>
+              <span className={styles.statLabel}>{t("stats.totalStaked")}</span>
             </div>
             <div className={styles.statCard}>
               <span
@@ -85,7 +87,7 @@ export default async function ProfilePage() {
               >
                 ${stats.totalReturn.toFixed(0)}
               </span>
-              <span className={styles.statLabel}>Total Return</span>
+              <span className={styles.statLabel}>{t("stats.totalReturn")}</span>
             </div>
           </div>
         )}

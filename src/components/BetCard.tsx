@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import type { BetWithMatch, BetPick } from "@/lib/types";
 import StatusBadge from "./StatusBadge";
 import styles from "./BetCard.module.css";
@@ -18,6 +19,7 @@ const pickLabels: Record<BetPick, string> = {
 };
 
 export default function BetCard({ bet, index }: BetCardProps) {
+  const t = useTranslations("Components.betCard");
   const matchTime = bet.match
     ? new Date(bet.match.startTime).toLocaleTimeString("en-US", {
         hour: "2-digit",
@@ -59,11 +61,11 @@ export default function BetCard({ bet, index }: BetCardProps) {
           {bet.match ? (
             <>
               <span className={styles.teamName}>{bet.match.homeTeam.name}</span>
-              <span className={styles.vsText}>vs</span>
+              <span className={styles.vsText}>{t("vs")}</span>
               <span className={styles.teamName}>{bet.match.awayTeam.name}</span>
             </>
           ) : (
-            <span className={styles.teamName}>Match {bet.matchId}</span>
+            <span className={styles.teamName}>{t("match", { id: bet.matchId })}</span>
           )}
         </div>
 
@@ -75,15 +77,15 @@ export default function BetCard({ bet, index }: BetCardProps) {
 
           <div className={styles.betDetails}>
             <div className={styles.detail}>
-              <span className={styles.detailLabel}>Odds</span>
+              <span className={styles.detailLabel}>{t("odds")}</span>
               <span className={styles.detailValue}>{bet.odd.toFixed(2)}</span>
             </div>
             <div className={styles.detail}>
-              <span className={styles.detailLabel}>Stake</span>
+              <span className={styles.detailLabel}>{t("stake")}</span>
               <span className={styles.detailValue}>${bet.stake}</span>
             </div>
             <div className={styles.detail}>
-              <span className={styles.detailLabel}>Return</span>
+              <span className={styles.detailLabel}>{t("return")}</span>
               <span
                 className={`${styles.detailValue} ${
                   bet.status === "WON"

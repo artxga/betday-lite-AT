@@ -1,0 +1,86 @@
+{
+  "Navbar": {
+    "title": "BetDay Lite",
+    "home": "Inicio",
+    "matches": "Partidos",
+    "myBets": "Mis Apuestas",
+    "profile": "Perfil",
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión"
+  },
+  "HomePage": {
+    "title": "Partidos de Hoy",
+    "description": "eventos disponibles para apostar hoy"
+  },
+  "Profile": {
+    "title": "Mis Apuestas",
+    "subtitleWithUser": "Historial de apuestas de {name}",
+    "subtitleDefault": "Tu historial de apuestas",
+    "stats": {
+      "totalBets": "Total Apuestas",
+      "won": "Ganadas",
+      "lost": "Perdidas",
+      "pending": "Pendientes",
+      "totalStaked": "Total Apostado",
+      "totalReturn": "Retorno Total"
+    }
+  },
+  "SignIn": {
+    "title": "Bienvenido a BetDay",
+    "subtitle": "Inicia sesión para apostar y rastrear tus resultados",
+    "emailLabel": "Correo",
+    "emailPlaceholder": "tu@email.com",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "Ingresa contraseña",
+    "passwordHint": "Pista: usa \"password\" como contraseña",
+    "signInBtn": "Iniciar Sesión",
+    "or": "o",
+    "googleBtn": "Continuar con Google",
+    "invalidCredentials": "Credenciales inválidas. Usa cualquier correo con contraseña: password",
+    "error": "Algo salió mal. Intenta de nuevo."
+  },
+  "BetDetail": {
+    "back": "← Volver a Mis Apuestas",
+    "title": "Detalle de Apuesta",
+    "homeWin": "Gana Local",
+    "draw": "Empate",
+    "awayWin": "Gana Visita",
+    "yourPick": "Tu Elección",
+    "odds": "Cuotas",
+    "stake": "Apostado",
+    "potentialReturn": "Retorno Potencial",
+    "actualReturn": "Retorno Real",
+    "placedAt": "Realizada el",
+    "betId": "ID de Apuesta"
+  },
+  "Components": {
+    "match": "partido",
+    "matches": "partidos",
+    "pending": "Pendiente",
+    "won": "Ganada",
+    "lost": "Perdida",
+    "draw": "Empate",
+    "emptyState": {
+      "title": "Sin apuestas aún",
+      "description": "Aún no has realizado ninguna apuesta. ¡Ve a la página de inicio y comienza a apostar en los partidos de hoy!",
+      "cta": "Explorar Partidos"
+    },
+    "eventCard": {
+      "signIn": "Inicia sesión para apostar",
+      "signInDesc": "Debes estar logueado para realizar apuestas.",
+      "signInBtn": "Iniciar Sesión",
+      "failed": "Error al realizar apuesta",
+      "failedDesc": "Por favor intenta de nuevo.",
+      "success": "¡Apuesta realizada! 🎉",
+      "successDesc": "${stake} a {pick} @ {odds}",
+      "betPlacedBanner": "✅ Apuesta realizada"
+    },
+    "betCard": {
+      "match": "Partido {id}",
+      "odds": "Cuota",
+      "stake": "Monto",
+      "return": "Retorno",
+      "vs": "vs"
+    }
+  }
+}
