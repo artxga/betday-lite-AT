@@ -6,7 +6,8 @@
     "myBets": "My Bets",
     "profile": "Profile",
     "login": "Sign In",
-    "logout": "Sign Out"
+    "logout": "Sign Out",
+    "signInPrompt": "Sign in to place bets"
   },
   "HomePage": {
     "title": "Today's Matches",

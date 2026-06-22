@@ -244,3 +244,30 @@ img {
   --normal-border: var(--border-light) !important;
   --normal-text: var(--text-primary) !important;
 }
+
+/* === Layout Structural Classes === */
+.app-layout {
+  display: flex;
+  padding-top: 64px; /* Navbar height */
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 72px; /* Sidebar is collapsed by default */
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  transition: margin-left var(--transition-normal);
+}
+
+@media (min-width: 769px) {
+  body.sidebar-expanded .main-content {
+    margin-left: 240px; /* Push content on desktop when open */
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0 !important; /* Never push on mobile, use overlay */
+  }
+}

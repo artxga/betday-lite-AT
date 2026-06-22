@@ -5,6 +5,7 @@ import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import Providers from "@/components/Providers";
 import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/Sidebar";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -35,9 +36,12 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <Navbar />
-            <main style={{ paddingTop: "80px", minHeight: "100vh" }}>
-              {children}
-            </main>
+            <div className="app-layout">
+              <Sidebar />
+              <main className="main-content">
+                {children}
+              </main>
+            </div>
           </Providers>
         </NextIntlClientProvider>
       </body>

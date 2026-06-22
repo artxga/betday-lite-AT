@@ -6,7 +6,8 @@
     "myBets": "Mis Apuestas",
     "profile": "Perfil",
     "login": "Iniciar Sesión",
-    "logout": "Cerrar Sesión"
+    "logout": "Cerrar Sesión",
+    "signInPrompt": "Inicia sesión para apostar"
   },
   "HomePage": {
     "title": "Partidos de Hoy",
