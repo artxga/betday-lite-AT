@@ -7,7 +7,9 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "oxlint",
-    "format": "oxfmt"
+    "format": "oxfmt",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.1",
@@ -24,11 +26,16 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.19",
+    "jest": "^30.4.2",
+    "jest-environment-jsdom": "^30.4.1",
     "oxfmt": "^0.55.0",
     "oxlint": "^1.70.0",
     "typescript": "^5"
