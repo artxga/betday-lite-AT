@@ -22,6 +22,7 @@ export default function BetCard({ bet, index }: BetCardProps) {
   const tPick = useTranslations("BetDetail");
   const matchTime = bet.match
     ? new Date(bet.match.startTime).toLocaleTimeString("en-US", {
+        timeZone: "America/Lima",
         hour: "2-digit",
         minute: "2-digit",
         hour12: true,
@@ -29,6 +30,7 @@ export default function BetCard({ bet, index }: BetCardProps) {
     : "";
 
   const placedDate = new Date(bet.placedAt).toLocaleDateString("en-US", {
+    timeZone: "America/Lima",
     month: "short",
     day: "numeric",
     hour: "2-digit",

@@ -24,6 +24,7 @@ export default function EventCard({ match, userPick }: EventCardProps) {
   const [activePickModal, setActivePickModal] = useState<BetPick | null>(null);
 
   const time = new Date(match.startTime).toLocaleTimeString("en-US", {
+    timeZone: "America/Lima",
     hour: "2-digit",
     minute: "2-digit",
     hour12: true,

@@ -28,8 +28,11 @@ export async function getMatchesGroupedByHour(): Promise<HourGroup[]> {
   const grouped = new Map<string, Match[]>();
 
   for (const match of matches) {
-    const date = new Date(match.startTime);
-    const hourKey = `${date.getHours().toString().padStart(2, "0")}:00`;
+    const limaDateStr = new Date(match.startTime).toLocaleString("en-US", {
+      timeZone: "America/Lima",
+    });
+    const limaDate = new Date(limaDateStr);
+    const hourKey = `${limaDate.getHours().toString().padStart(2, "0")}:00`;
 
     if (!grouped.has(hourKey)) {
       grouped.set(hourKey, []);
