@@ -106,11 +106,11 @@ export default function SignInPage() {
           </button>
         </form>
 
-        <div className="flex items-center gap-md my-xl before:flex-1 before:h-[1px] before:bg-border-subtle after:flex-1 after:h-[1px] after:bg-border-subtle">
+        {/* <div className="flex items-center gap-md my-xl before:flex-1 before:h-[1px] before:bg-border-subtle after:flex-1 after:h-[1px] after:bg-border-subtle">
           <span className="text-sm text-text-muted">{t("or")}</span>
-        </div>
+        </div> */}
 
-        <button
+        {/* <button
           className="w-full liquid-button p-3 rounded-md text-sm font-semibold text-text-primary flex items-center justify-center gap-sm"
           onClick={() => signIn("google", { callbackUrl: "/" })}
         >
@@ -133,7 +133,7 @@ export default function SignInPage() {
             />
           </svg>
           {t("googleBtn")}
-        </button>
+        </button> */}
       </div>
     </div>
   );
