@@ -16,7 +16,7 @@ export default async function BetDetailPage({
 
   const { betId, locale } = await params;
   const t = await getTranslations({ locale, namespace: "BetDetail" });
-  const bet = getBetById(session.user.id, betId);
+  const bet = await getBetById(session.user.id, betId);
   if (!bet) notFound();
 
   const pickLabels: Record<BetPick, { short: string; full: string }> = {

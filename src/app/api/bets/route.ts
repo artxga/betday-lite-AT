@@ -10,7 +10,7 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const bets = getAllBetsForUser(session.user.id);
+  const bets = await getAllBetsForUser(session.user.id);
   return NextResponse.json({ bets });
 }
 
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "pick must be HOME, DRAW, or AWAY" }, { status: 400 });
     }
 
-    const bet = placeBet(session.user.id, matchId, pick, stake);
+    const bet = await placeBet(session.user.id, matchId, pick, stake);
     return NextResponse.json({ bet }, { status: 201 });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Internal server error";

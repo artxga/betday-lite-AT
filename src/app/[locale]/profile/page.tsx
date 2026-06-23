@@ -21,7 +21,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ locale
     redirect("/auth/signin");
   }
 
-  const bets = getAllBetsForUser(session.user.id);
+  const bets = await getAllBetsForUser(session.user.id);
 
   const sortedBets = [...bets].sort(
     (a, b) => new Date(b.placedAt).getTime() - new Date(a.placedAt).getTime(),

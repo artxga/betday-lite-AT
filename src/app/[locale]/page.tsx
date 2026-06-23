@@ -26,11 +26,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   } catch {
     // Fallback: import directly if fetch fails during build
     const { getMatchesGroupedByHour } = await import("@/lib/data/matches");
-    hourGroups = getMatchesGroupedByHour();
+    hourGroups = await getMatchesGroupedByHour();
   }
 
   const session = await auth();
-  const userBets = session?.user?.id ? getUserBets(session.user.id) : [];
+  const userBets = session?.user?.id ? await getUserBets(session.user.id) : [];
   const userPicks = userBets.reduce(
     (acc, bet) => {
       acc[bet.matchId] = bet.pick;

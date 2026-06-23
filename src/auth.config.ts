@@ -1,6 +1,7 @@
 import type { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
+import { supabase } from "@/lib/supabase";
 
 export default {
   providers: [
@@ -36,6 +37,24 @@ export default {
     signIn: "/auth/signin",
   },
   callbacks: {
+    async signIn({ user }) {
+      if (user.email) {
+        const id = user.id || user.email;
+        const name = user.name || user.email.split("@")[0];
+        
+        const { error } = await supabase.from("users").upsert({
+          id: id,
+          name: name,
+          email: user.email,
+          image: user.image || null,
+        }, { onConflict: "id" });
+
+        if (error) {
+          console.error("Error upserting user during signIn:", error);
+        }
+      }
+      return true;
+    },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isProtected =

@@ -1,51 +1,41 @@
 import type { Bet, BetPick, BetWithMatch } from "@/lib/types";
 import { getMatchById } from "./matches";
-import betsData from "../../../bets.me.50.json";
+import { supabase } from "../supabase";
 
-const globalStore = globalThis as unknown as {
-  _betStore: Map<string, Bet[]>;
-  _betCounter: number;
-};
-
-if (!globalStore._betStore) {
-  globalStore._betStore = new Map<string, Bet[]>();
-  globalStore._betCounter = 100;
-
-  // Seed the demo user with mock data
-  const DEMO_USER_ID = "demo-user";
-  globalStore._betStore.set(DEMO_USER_ID, [...(betsData.bets as Bet[])]);
+export async function getUserBets(userId: string): Promise<Bet[]> {
+  const { data, error } = await supabase.from("bets").select("*").eq("userId", userId);
+  if (error) {
+    console.error("Error fetching user bets:", error);
+    return [];
+  }
+  return data as Bet[];
 }
 
-const store = globalStore._betStore;
+export async function getBetById(userId: string, betId: string): Promise<BetWithMatch | undefined> {
+  const { data, error } = await supabase.from("bets").select("*").eq("userId", userId).eq("id", betId).single();
+  if (error || !data) return undefined;
 
-function generateBetId(): string {
-  globalStore._betCounter++;
-  return `bet_${globalStore._betCounter.toString().padStart(3, "0")}`;
-}
-
-export function getUserBets(userId: string): Bet[] {
-  return store.get(userId) ?? [];
-}
-
-export function getBetById(userId: string, betId: string): BetWithMatch | undefined {
-  const bets = store.get(userId) ?? [];
-  const bet = bets.find((b) => b.id === betId);
-  if (!bet) return undefined;
-
-  const match = getMatchById(bet.matchId);
+  const bet = data as Bet;
+  const match = await getMatchById(bet.matchId);
   return { ...bet, match };
 }
 
-export function getAllBetsForUser(userId: string): BetWithMatch[] {
-  const bets = store.get(userId) ?? [];
-  return bets.map((bet) => ({
-    ...bet,
-    match: getMatchById(bet.matchId),
-  }));
+export async function getAllBetsForUser(userId: string): Promise<BetWithMatch[]> {
+  const bets = await getUserBets(userId);
+  return Promise.all(
+    bets.map(async (bet) => ({
+      ...bet,
+      match: await getMatchById(bet.matchId),
+    }))
+  );
 }
 
-export function placeBet(userId: string, matchId: string, pick: BetPick, stake: number): Bet {
-  const match = getMatchById(matchId);
+function generateBetId(): string {
+  return `bet_${Math.random().toString(36).substr(2, 9)}`;
+}
+
+export async function placeBet(userId: string, matchId: string, pick: BetPick, stake: number): Promise<Bet> {
+  const match = await getMatchById(matchId);
   if (!match) {
     throw new Error(`Match ${matchId} not found`);
   }
@@ -68,35 +58,60 @@ export function placeBet(userId: string, matchId: string, pick: BetPick, stake: 
     return: null,
   };
 
-  if (!store.has(userId)) {
-    store.set(userId, []);
+  const { error } = await supabase.from("bets").insert({
+    id: newBet.id,
+    userId,
+    matchId: newBet.matchId,
+    placedAt: newBet.placedAt,
+    pick: newBet.pick,
+    odd: newBet.odd,
+    stake: newBet.stake,
+    status: newBet.status,
+    return: newBet.return,
+  });
+
+  if (error) {
+    console.error("Error inserting bet:", error);
+    throw new Error("Failed to place bet");
   }
-  store.get(userId)!.push(newBet);
 
   // Simulate resolution after a random delay (10-30 seconds)
-  setTimeout(
-    () => {
-      const random = Math.random();
-      if (random < 0.4) {
-        newBet.status = "WON";
-        newBet.return = parseFloat((newBet.stake * newBet.odd).toFixed(2));
-      } else {
-        newBet.status = "LOST";
-        newBet.return = 0;
-      }
-    },
-    Math.floor(Math.random() * 20000) + 10000,
-  );
+  // In a real app this would be a webhook or cron job
+  setTimeout(async () => {
+    const random = Math.random();
+    let status = "LOST";
+    let betReturn = 0;
+
+    if (random < 0.4) {
+      status = "WON";
+      betReturn = parseFloat((newBet.stake * newBet.odd).toFixed(2));
+    }
+
+    await supabase.from("bets").update({ status, return: betReturn }).eq("id", newBet.id);
+  }, Math.floor(Math.random() * 20000) + 10000);
 
   return newBet;
 }
 
-export function hasUserBetOnMatch(userId: string, matchId: string): boolean {
-  const bets = store.get(userId) ?? [];
-  return bets.some((b) => b.matchId === matchId);
+export async function hasUserBetOnMatch(userId: string, matchId: string): Promise<boolean> {
+  const { data, error } = await supabase
+    .from("bets")
+    .select("id")
+    .eq("userId", userId)
+    .eq("matchId", matchId)
+    .limit(1);
+    
+  if (error) return false;
+  return data.length > 0;
 }
 
-export function getUserBetsForMatch(userId: string, matchId: string): Bet[] {
-  const bets = store.get(userId) ?? [];
-  return bets.filter((b) => b.matchId === matchId);
+export async function getUserBetsForMatch(userId: string, matchId: string): Promise<Bet[]> {
+  const { data, error } = await supabase
+    .from("bets")
+    .select("*")
+    .eq("userId", userId)
+    .eq("matchId", matchId);
+    
+  if (error) return [];
+  return data as Bet[];
 }

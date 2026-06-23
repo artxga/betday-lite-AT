@@ -10,7 +10,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ bet
   }
 
   const { betId } = await params;
-  const bet = getBetById(session.user.id, betId);
+  const bet = await getBetById(session.user.id, betId);
 
   if (!bet) {
     return NextResponse.json({ error: "Bet not found" }, { status: 404 });

@@ -1,20 +1,37 @@
-import type { Match, MatchesResponse, HourGroup } from "@/lib/types";
-import matchesData from "../../../matches.today.50.json";
+import type { Match, HourGroup } from "@/lib/types";
+import { supabase } from "../supabase";
 
-const data = matchesData as MatchesResponse;
+export async function getMatches(): Promise<Match[]> {
+  const { data, error } = await supabase
+    .from("matches")
+    .select("*")
+    .order("startTime", { ascending: true });
 
-export function getMatches(): Match[] {
-  return data.matches;
+  if (error) {
+    console.error("Error fetching matches:", error);
+    return [];
+  }
+  return data as Match[];
 }
 
-export function getMatchById(id: string): Match | undefined {
-  return data.matches.find((m) => m.id === id);
+export async function getMatchById(id: string): Promise<Match | undefined> {
+  const { data, error } = await supabase
+    .from("matches")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error || !data) {
+    return undefined;
+  }
+  return data as Match;
 }
 
-export function getMatchesGroupedByHour(): HourGroup[] {
+export async function getMatchesGroupedByHour(): Promise<HourGroup[]> {
+  const matches = await getMatches();
   const grouped = new Map<string, Match[]>();
 
-  for (const match of data.matches) {
+  for (const match of matches) {
     const date = new Date(match.startTime);
     const hourKey = `${date.getHours().toString().padStart(2, "0")}:00`;
 

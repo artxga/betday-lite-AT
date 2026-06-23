@@ -131,7 +131,3 @@ El proyecto incluye de manera nativa comprobaciones _pre-commit_. Al hacer `git 
 2. **Bets**: In-memory store local manejado por `/api/bets`.
 3. **Auth**: NextAuth v5 con Middleware Edge-safe en `/profile`.
 4. **i18n**: Interceptado por `next-intl` a nivel de App Router.
-
-## 📄 License
-
-MIT

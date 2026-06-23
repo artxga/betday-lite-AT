@@ -14,12 +14,14 @@
     "cypress:run": "cypress run"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.108.2",
     "@tailwindcss/postcss": "^4.3.1",
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.21.0",
     "next": "15.5.19",
     "next-auth": "^5.0.0-beta.31",
     "next-intl": "^4.13.0",
+    "pg": "^8.22.0",
     "postcss": "^8.5.15",
     "react": "19.1.0",
     "react-dom": "19.1.0",
