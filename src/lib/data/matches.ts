@@ -15,11 +15,7 @@ export async function getMatches(): Promise<Match[]> {
 }
 
 export async function getMatchById(id: string): Promise<Match | undefined> {
-  const { data, error } = await supabase
-    .from("matches")
-    .select("*")
-    .eq("id", id)
-    .single();
+  const { data, error } = await supabase.from("matches").select("*").eq("id", id).single();
 
   if (error || !data) {
     return undefined;

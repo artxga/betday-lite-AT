@@ -41,13 +41,16 @@ export default {
       if (user.email) {
         const id = user.id || user.email;
         const name = user.name || user.email.split("@")[0];
-        
-        const { error } = await supabase.from("users").upsert({
-          id: id,
-          name: name,
-          email: user.email,
-          image: user.image || null,
-        }, { onConflict: "id" });
+
+        const { error } = await supabase.from("users").upsert(
+          {
+            id: id,
+            name: name,
+            email: user.email,
+            image: user.image || null,
+          },
+          { onConflict: "id" },
+        );
 
         if (error) {
           console.error("Error upserting user during signIn:", error);

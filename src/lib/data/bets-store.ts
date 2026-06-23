@@ -12,7 +12,12 @@ export async function getUserBets(userId: string): Promise<Bet[]> {
 }
 
 export async function getBetById(userId: string, betId: string): Promise<BetWithMatch | undefined> {
-  const { data, error } = await supabase.from("bets").select("*").eq("userId", userId).eq("id", betId).single();
+  const { data, error } = await supabase
+    .from("bets")
+    .select("*")
+    .eq("userId", userId)
+    .eq("id", betId)
+    .single();
   if (error || !data) return undefined;
 
   const bet = data as Bet;
@@ -26,7 +31,7 @@ export async function getAllBetsForUser(userId: string): Promise<BetWithMatch[]>
     bets.map(async (bet) => ({
       ...bet,
       match: await getMatchById(bet.matchId),
-    }))
+    })),
   );
 }
 
@@ -34,7 +39,12 @@ function generateBetId(): string {
   return `bet_${Math.random().toString(36).substr(2, 9)}`;
 }
 
-export async function placeBet(userId: string, matchId: string, pick: BetPick, stake: number): Promise<Bet> {
+export async function placeBet(
+  userId: string,
+  matchId: string,
+  pick: BetPick,
+  stake: number,
+): Promise<Bet> {
   const match = await getMatchById(matchId);
   if (!match) {
     throw new Error(`Match ${matchId} not found`);
@@ -77,18 +87,21 @@ export async function placeBet(userId: string, matchId: string, pick: BetPick, s
 
   // Simulate resolution after a random delay (10-30 seconds)
   // In a real app this would be a webhook or cron job
-  setTimeout(async () => {
-    const random = Math.random();
-    let status = "LOST";
-    let betReturn = 0;
+  setTimeout(
+    async () => {
+      const random = Math.random();
+      let status = "LOST";
+      let betReturn = 0;
 
-    if (random < 0.4) {
-      status = "WON";
-      betReturn = parseFloat((newBet.stake * newBet.odd).toFixed(2));
-    }
+      if (random < 0.4) {
+        status = "WON";
+        betReturn = parseFloat((newBet.stake * newBet.odd).toFixed(2));
+      }
 
-    await supabase.from("bets").update({ status, return: betReturn }).eq("id", newBet.id);
-  }, Math.floor(Math.random() * 20000) + 10000);
+      await supabase.from("bets").update({ status, return: betReturn }).eq("id", newBet.id);
+    },
+    Math.floor(Math.random() * 20000) + 10000,
+  );
 
   return newBet;
 }
@@ -100,7 +113,7 @@ export async function hasUserBetOnMatch(userId: string, matchId: string): Promis
     .eq("userId", userId)
     .eq("matchId", matchId)
     .limit(1);
-    
+
   if (error) return false;
   return data.length > 0;
 }
@@ -111,7 +124,7 @@ export async function getUserBetsForMatch(userId: string, matchId: string): Prom
     .select("*")
     .eq("userId", userId)
     .eq("matchId", matchId);
-    
+
   if (error) return [];
   return data as Bet[];
 }
