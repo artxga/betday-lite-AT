@@ -117,17 +117,17 @@ El proyecto incluye de manera nativa comprobaciones _pre-commit_. Al hacer `git 
 
 ### Server vs Client Components
 
-| Component          | Type   | Reason                      |
-| ------------------ | ------ | --------------------------- |
-| `page.tsx` (Home)  | Server | Fetches data from API route |
-| `profile/page.tsx` | Server | Auth check + data fetch     |
-| `Timeline`         | Client | Framer Motion animations    |
-| `EventCard`        | Client | User interaction (betting)  |
-| `Navbar`           | Client | Session state + menu toggle |
+| Componente         | Tipo   | Razón                                     |
+| ------------------ | ------ | ----------------------------------------- |
+| `page.tsx` (Home)  | Server | Obtiene datos desde Supabase              |
+| `profile/page.tsx` | Server | Verificación de Auth + obtención de datos |
+| `Timeline`         | Client | Animaciones con Framer Motion             |
+| `EventCard`        | Client | Interacción del usuario (apuestas)        |
+| `Navbar`           | Client | Estado de sesión + toggle del menú        |
 
 ### Data Flow
 
-1. **Matches**: Carga local desde JSON (simulado) servido vía API Route.
-2. **Bets**: In-memory store local manejado por `/api/bets`.
-3. **Auth**: NextAuth v5 con Middleware Edge-safe en `/profile`.
+1. **Matches**: Carga asíncrona desde Supabase (`matches` table).
+2. **Bets**: Almacenamiento persistente en Supabase (`bets` table) manejado por funciones de servidor y APIs.
+3. **Auth**: NextAuth v5 con Middleware Edge-safe en `/profile` y sincronización con tabla `users` de Supabase.
 4. **i18n**: Interceptado por `next-intl` a nivel de App Router.
